@@ -1670,6 +1670,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="HomeStyle\StyleSheet1.css" />
     <Content Include="Images\code1.PNG" />
     <Content Include="Images\WhatsApp Image 2021-12-08 at 12.48.00.jpeg" />
     <Content Include="Images\WhatsApp Image 2021-12-08 at 12.48.01.jpeg" />
@@ -1804,6 +1805,7 @@
     <Content Include="Views\Admin\CategoryEdit.cshtml" />
     <Content Include="Views\Home\Checkout.cshtml" />
     <Content Include="Views\Home\CheckoutDetails.cshtml" />
+    <Content Include="Views\Home\ServiceDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

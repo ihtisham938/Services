@@ -1,0 +1,159 @@
+﻿@model OnlineHomeServices.DAL.Tbl_Service
+
+@{
+    ViewBag.Title = "ServiceDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ServiceDetails</h2>
+<link href="~/HomeStyle/StyleSheet1.css" rel="stylesheet" />
+<div class=" container">
+    <div class="container">
+        <div class="card">
+            <div class="container-fliud">
+                <div class="wrapper row">
+                    <div class="preview col-md-6">
+
+                        <div class="preview-pic tab-content">
+                            <div class="tab-pane active" id="pic-1">
+                                <img class="img-responsive" title="Click to View Product detail"
+                                     style="cursor:pointer;height:160px;width:100%"
+                                     src="~/ServiceImg/@Model.ServiceImage" />
+                            </div>
+                   
+                        </div>
+                      
+
+                    </div>
+                    <div class="details col-md-6">
+                        <h3 class="product-title">@Model.ProductName</h3>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <span class="review-no">41 reviews</span>
+                        </div>
+                        <p class="product-description">@Model.Description</p>
+                        <h4 class="price">current price: <span>@Model.Price</span></h4>
+                        <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
+                        <h5 class="sizes">
+                            sizes:
+                            <span class="size" data-toggle="tooltip" title="small">s</span>
+                            <span class="size" data-toggle="tooltip" title="medium">m</span>
+                            <span class="size" data-toggle="tooltip" title="large">l</span>
+                            <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
+                        </h5>
+                        <h5 class="colors">
+                            colors:
+                            <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
+                            <span class="color green"></span>
+                            <span class="color blue"></span>
+                        </h5>
+                        <div class="action">
+                            <button class="add-to-cart btn btn-default" type="button">Send request</button>
+                            <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div>
+    <h4>Tbl_Service</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDelete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDelete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFeatured)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFeatured)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tbl_Category.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tbl_Category.CategoryName)
+        </dd>
+
+    </dl>
+</div>*@

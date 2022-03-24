@@ -13,9 +13,6 @@ namespace OnlineHomeServices.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-
-
-
         public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
 
         public List<SelectListItem> GetCategory()

@@ -13,6 +13,7 @@ namespace OnlineHomeServices.Controllers
 {
     public class HomeController : Controller
     {
+        public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
         dbOnlineHomeServicesEntities ctx = new dbOnlineHomeServicesEntities();
         public ActionResult Index(string search, int? page)
         {
@@ -117,6 +118,15 @@ namespace OnlineHomeServices.Controllers
             }
             Session["cart"] = cart;
             return Redirect("Index");
+        }
+        dbOnlineHomeServicesEntities db = new dbOnlineHomeServicesEntities();
+        
+        public ActionResult ServiceDetails(int serviceId)
+        {
+            var q = db.Tbl_Service.FirstOrDefault(m => m.ServiceId == serviceId);
+            return View(q);
+
+            //return View(_unitOfWork.GetRepositoryInstance<Tbl_Category>().GetFirstorDefault(serviceId));
         }
     }
 }

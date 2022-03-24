@@ -15,17 +15,17 @@
         <div class="item active">
             <div class="imgOverlay"></div>
             <img style="height:320px;width:100%" src="../Images/WhatsApp Image 2021-12-08 at 12.48.01.jpeg" alt="First slide">
-            
+
         </div>
         <div class="item">
             <div class="imgOverlay"></div>
             <img style="height:320px;width:100%" src="../Images/WhatsApp Image 2021-12-08 at 12.48.00.jpeg" alt="Second slide">
-            
+
         </div>
         <div class="item">
             <div class="imgOverlay"></div>
             <img style="height:320px;width:100%" src="../Images/code1.PNG" alt="Third slide">
-           
+
         </div>
     </div>
     <a class="left carousel-control" href="#themeSlider" data-slide="prev">
@@ -60,44 +60,53 @@
 <div class="row product-container">
     @foreach (var item in Model.ListOfServices)
     {
-        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
-            <div class="thumbnail product-item" style="height:300px">
+    <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
+        
+        <div class="thumbnail product-item" style="height:350px">
 
-                <img class="img-responsive" title="Click to View Product detail"
-                     style="cursor:pointer;height:160px;width:100%"
-                     src="~/ServiceImg/@item.ServiceImage" />
+            <img class="img-responsive" title="Click to View Product detail"
+                 style="cursor:pointer;height:160px;width:100%"
+                 src="~/ServiceImg/@item.ServiceImage" />
+            
 
-                <div class="caption">
-                    <h5>@item.ProductName</h5>
-                    <p>@item.Price ৳.</p>
-                    <p>
-                        @if (item.Quantity > 0)
-                        {
-                            using (Html.BeginForm("AddToCart", "Home", new { serviceId = item.ServiceId, url = "Index" }, FormMethod.Post))
-                            {
-                                <button type="submit" class="pull-right"><i class="fa fa-shopping-cart"></i></button>
-                            }
-                        <p>Available</p>
-                    }
-                    else
+            <div class="caption">
+
+
+                <h5>@item.ProductName</h5>
+                <p>Rs. @item.Price</p>
+                <p>
+                    @if (item.Quantity > 0)
                     {
-                        <p>Not Available</p>
-                    }
-                        </p>
-                        <div class="product-item-badge">
-                            @if (item.IsFeatured == true)
-                            {
-                                <p>New</p>
+                        using (Html.BeginForm("AddToCart", "Home", new { serviceId = item.ServiceId, url = "Index" }, FormMethod.Post))
+                        {
+                            <button type="submit" class="pull-right"><i class="fa fa-shopping-cart"></i></button>
+                        }
+                    <p>Available</p>
+                }
+                else
+                {
+                    <p>Not Available</p>
+                }
+                    </p>
 
-                            }
-                            else
-                            {
-                                <p>Old</p>
-                            }
-                        </div>
+                    <div class="product-item-badge">
+                        @if (item.IsFeatured == true)
+                        {
+
+                            <p>New</p>
+
+                        }
+                        else
+                        {
+                            <p>Old</p>
+                        }
                     </div>
+                    <a href=" @Url.Action("ServiceDetails", "Home",  new { serviceId = item.ServiceId }, null) " >Detail</a>
+                    
+
                 </div>
             </div>
+        </div>
         }
 
 
