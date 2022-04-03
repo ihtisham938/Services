@@ -16,5 +16,8 @@ namespace OnlineHomeServices.DAL
     {
         public int RoleId { get; set; }
         public string RoleName { get; set; }
+        public int Userid { get; set; }
+    
+        public virtual Tbl_User Tbl_User { get; set; }
     }
 }

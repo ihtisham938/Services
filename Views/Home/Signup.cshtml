@@ -1,0 +1,76 @@
+﻿@model OnlineHomeServices.DAL.Tbl_User
+@{
+    ViewBag.Title = "Signup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Signup</h2>
+
+<style>
+    .btn {
+        margin-top: 30px;
+    }
+
+    .from-group {
+        margin-top: .25em;
+        margin-bottom: 1.5em;
+    }
+</style>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Signup</h2>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @using (Html.BeginForm("addSignup", "Home", FormMethod.Post))
+            {
+                <div class="container">
+                    <div class="from-group">
+                        <label>Full name</label>
+                        @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                    </div>
+
+                </div>
+
+                <div class="container">
+                    <div class="from-group">
+                        <label>Location</label>
+                        @Html.ValidationMessageFor(x => x.location, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(x => x.location, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="from-group">
+                        <label>Username</label>
+                        @Html.ValidationMessageFor(x => x.Username, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(x => x.Username, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="from-group">
+                        <label>Password</label>
+                        @Html.ValidationMessageFor(x => x.password, "", new { @class = "text-danger" })
+                        @Html.PasswordFor(x => x.password, new { @class = "form-control" })
+                    </div>
+                    <p>Already have a account @Html.ActionLink("Login", "Login", "Home")</p>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+        <div id="imagess" class=" col-md-6">
+
+            <img src="~/images/log.png" class=" img-responsive" />
+
+        </div>
+    </div>
+
+
+
+</div>

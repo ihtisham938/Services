@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbOnlineHomeServicesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbOnlineHomeServicesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Tbl_Cart">
           <Key>
             <PropertyRef Name="CartId" />
@@ -58,6 +58,7 @@
           </Key>
           <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="varchar" MaxLength="200" />
+          <Property Name="Userid" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tbl_Service">
           <Key>
@@ -99,6 +100,16 @@
           <Property Name="SlideTitle" Type="varchar" MaxLength="500" />
           <Property Name="SlideImage" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="Tbl_User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="50" />
+          <Property Name="Username" Type="nchar" MaxLength="50" />
+          <Property Name="password" Type="nchar" MaxLength="50" />
+          <Property Name="location" Type="nchar" MaxLength="50" />
+        </EntityType>
         <Association Name="FK__Tbl_Cart__Servic__38996AB5">
           <End Role="Tbl_Service" Type="Self.Tbl_Service" Multiplicity="0..1" />
           <End Role="Tbl_Cart" Type="Self.Tbl_Cart" Multiplicity="*" />
@@ -135,6 +146,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tbl_Roles_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Roles" Type="Self.Tbl_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tbl_Roles">
+              <PropertyRef Name="Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="dbOnlineHomeServicesModelStoreContainer">
           <EntitySet Name="Tbl_Cart" EntityType="Self.Tbl_Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_CartStatus" EntityType="Self.Tbl_CartStatus" Schema="dbo" store:Type="Tables" />
@@ -145,6 +168,7 @@
           <EntitySet Name="Tbl_Service" EntityType="Self.Tbl_Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_ShippingDetails" EntityType="Self.Tbl_ShippingDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_SlideImage" EntityType="Self.Tbl_SlideImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_User" EntityType="Self.Tbl_User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Tbl_Cart__Servic__38996AB5" Association="Self.FK__Tbl_Cart__Servic__38996AB5">
             <End Role="Tbl_Service" EntitySet="Tbl_Service" />
             <End Role="Tbl_Cart" EntitySet="Tbl_Cart" />
@@ -157,9 +181,12 @@
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
             <End Role="Tbl_ShippingDetails" EntitySet="Tbl_ShippingDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Roles_Tbl_User" Association="Self.FK_Tbl_Roles_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Roles" EntitySet="Tbl_Roles" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbOnlineHomeServicesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -219,6 +246,8 @@
           </Key>
           <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Userid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_User" Relationship="dbOnlineHomeServicesModel.FK_Tbl_Roles_Tbl_User" FromRole="Tbl_Roles" ToRole="Tbl_User" />
         </EntityType>
         <EntityType Name="Tbl_Service">
           <Key>
@@ -321,7 +350,35 @@
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
             <End Role="Tbl_ShippingDetails" EntitySet="Tbl_ShippingDetails" />
           </AssociationSet>
+          <EntitySet Name="Tbl_User" EntityType="dbOnlineHomeServicesModel.Tbl_User" />
+          <AssociationSet Name="FK_Tbl_Roles_Tbl_User" Association="dbOnlineHomeServicesModel.FK_Tbl_Roles_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Roles" EntitySet="Tbl_Roles" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Tbl_User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Tbl_Roles" Relationship="dbOnlineHomeServicesModel.FK_Tbl_Roles_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Roles" />
+        </EntityType>
+        <Association Name="FK_Tbl_Roles_Tbl_User">
+          <End Type="dbOnlineHomeServicesModel.Tbl_User" Role="Tbl_User" Multiplicity="1" />
+          <End Type="dbOnlineHomeServicesModel.Tbl_Roles" Role="Tbl_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tbl_Roles">
+              <PropertyRef Name="Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -383,6 +440,7 @@
           <EntitySetMapping Name="Tbl_Roles">
             <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Roles">
               <MappingFragment StoreEntitySet="Tbl_Roles">
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
               </MappingFragment>
@@ -428,6 +486,17 @@
                 <ScalarProperty Name="SlideId" ColumnName="SlideId" />
                 <ScalarProperty Name="SlideTitle" ColumnName="SlideTitle" />
                 <ScalarProperty Name="SlideImage" ColumnName="SlideImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_User">
+            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_User">
+              <MappingFragment StoreEntitySet="Tbl_User">
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

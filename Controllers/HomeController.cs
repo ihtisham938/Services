@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace OnlineHomeServices.Controllers
 {
@@ -119,14 +120,52 @@ namespace OnlineHomeServices.Controllers
             Session["cart"] = cart;
             return Redirect("Index");
         }
-        dbOnlineHomeServicesEntities db = new dbOnlineHomeServicesEntities();
+        
         
         public ActionResult ServiceDetails(int serviceId)
         {
-            var q = db.Tbl_Service.FirstOrDefault(m => m.ServiceId == serviceId);
+            var q = ctx.Tbl_Service.FirstOrDefault(m => m.ServiceId == serviceId);
             return View(q);
 
             //return View(_unitOfWork.GetRepositoryInstance<Tbl_Category>().GetFirstorDefault(serviceId));
         }
+        public ActionResult Signup()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult addSignup(Tbl_User model1)
+        {
+            Tbl_User obj1 = new Tbl_User();
+            obj1.Email = model1.Email;
+            obj1.Username = model1.Username;
+            obj1.password = model1.password;
+            obj1.location = model1.location;
+            ctx.Tbl_User.Add(obj1);
+            ctx.SaveChanges();
+            return RedirectToAction("Login");
+        }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(Tbl_User model1)
+        {
+            Tbl_User obj1 = ctx.Tbl_User.Where(x => x.Username.Equals(model1.Username) && x.password.Equals(model1.password)).SingleOrDefault();
+            if (obj1 != null)
+            {
+                Session["Name"] = obj1.Username.ToString();
+                return Redirect("Index");
+
+            }
+            else
+            {
+                ViewBag.error = "Invalid username and password.";
+                return View();
+            }
+
+        }
+
     }
 }

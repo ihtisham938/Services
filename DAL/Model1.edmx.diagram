@@ -17,6 +17,8 @@
         <AssociationConnector Association="dbOnlineHomeServicesModel.FK__Tbl_Cart__Servic__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="dbOnlineHomeServicesModel.FK__Tbl_Servi__Categ__398D8EEE" ManuallyRouted="false" />
         <AssociationConnector Association="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_User" Width="1.5" PointX="5.5" PointY="10.5" />
+        <AssociationConnector Association="dbOnlineHomeServicesModel.FK_Tbl_Roles_Tbl_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

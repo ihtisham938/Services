@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace OnlineHomeServices.Controllers
 {
+    
     public class AdminController : Controller
     {
         // GET: Admin
@@ -111,5 +112,6 @@ namespace OnlineHomeServices.Controllers
             _unitOfWork.GetRepositoryInstance<Tbl_Service>().Add(tbl);
             return RedirectToAction("Service");
         }
+
     }
 }

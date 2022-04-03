@@ -34,5 +34,6 @@ namespace OnlineHomeServices.DAL
         public virtual DbSet<Tbl_Service> Tbl_Service { get; set; }
         public virtual DbSet<Tbl_ShippingDetails> Tbl_ShippingDetails { get; set; }
         public virtual DbSet<Tbl_SlideImage> Tbl_SlideImage { get; set; }
+        public virtual DbSet<Tbl_User> Tbl_User { get; set; }
     }
 }
