@@ -12,12 +12,17 @@ namespace OnlineHomeServices.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Roles
+    public partial class Tbl_Orders
     {
         public int id { get; set; }
-        public int UserId { get; set; }
-        public string RoleName { get; set; }
-    
-        public virtual Tbl_User Tbl_User { get; set; }
+        public string description { get; set; }
+        public string SellerName { get; set; }
+        public string CustomerName { get; set; }
+        public string Status { get; set; }
+        public string Address { get; set; }
+        public string Long { get; set; }
+        public string Lat { get; set; }
+        public string Phone_number { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     }
 }

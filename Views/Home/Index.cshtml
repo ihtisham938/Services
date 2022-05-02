@@ -81,7 +81,11 @@
                         {
                             <button type="submit" class="pull-right"><i class="fa fa-shopping-cart"></i></button>
                         }
-                    <p>Available</p>
+
+                        <a href=" @Url.Action("SendRequest", "Home", new { serviceId = item.ServiceId }, null) ">Send request</a>
+
+                        
+<p>Available</p>
                 }
                 else
                 {
@@ -101,9 +105,14 @@
                             <p>Old</p>
                         }
                     </div>
-                    <a href=" @Url.Action("ServiceDetails", "Home",  new { serviceId = item.ServiceId }, null) " >Detail</a>
-                    
+                @if (User.Identity.IsAuthenticated)
+                {
+                if (User.IsInRole("Seller"))
+                {
+                    <a href=" @Url.Action("ServiceDetails", "Home", new { serviceId = item.ServiceId }, null) " >Detail</a>
 
+                }
+                }
                 </div>
             </div>
         </div>

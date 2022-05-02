@@ -12,12 +12,14 @@ namespace OnlineHomeServices.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Roles
+    public partial class Tbl_review
     {
         public int id { get; set; }
-        public int UserId { get; set; }
-        public string RoleName { get; set; }
-    
-        public virtual Tbl_User Tbl_User { get; set; }
+        public Nullable<int> Orderid { get; set; }
+        public Nullable<int> rating { get; set; }
+        public string Review { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
+        public string reviwername { get; set; }
+        public string reviewname { get; set; }
     }
 }

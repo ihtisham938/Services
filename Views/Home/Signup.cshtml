@@ -16,61 +16,92 @@
         margin-bottom: 1.5em;
     }
 </style>
-<div class="container">
+@using (Html.BeginForm("addSignup", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
 
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Signup</h2>
+        <div class="row">
+            <div class="col-md-6">
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @using (Html.BeginForm("addSignup", "Home", FormMethod.Post))
-            {
-                <div class="container">
-                    <div class="from-group">
-                        <label>Full name</label>
-                        @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
-                        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @using (Html.BeginForm("addSignup", "Home", FormMethod.Post))
+                {
+                    <div class="container">
+                        <div class="from-group">
+                            <label>Full name</label>
+                            @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                        </div>
+
                     </div>
 
-                </div>
-
-                <div class="container">
-                    <div class="from-group">
-                        <label>Location</label>
-                        @Html.ValidationMessageFor(x => x.location, "", new { @class = "text-danger" })
-                        @Html.TextBoxFor(x => x.location, new { @class = "form-control" })
+                    <div class="container">
+                        <div class="from-group">
+                            <label>Location</label>
+                            @Html.ValidationMessageFor(x => x.location, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(x => x.location, new { @class = "form-control" })
+                        </div>
                     </div>
-                </div>
-                <div class="container">
-                    <div class="from-group">
-                        <label>Username</label>
-                        @Html.ValidationMessageFor(x => x.Username, "", new { @class = "text-danger" })
-                        @Html.TextBoxFor(x => x.Username, new { @class = "form-control" })
+                    <div class="container">
+                        <div class="from-group">
+                            <label>Username</label>
+                            @Html.ValidationMessageFor(x => x.Username, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(x => x.Username, new { @class = "form-control" })
+                        </div>
                     </div>
-                </div>
-
-                <div class="container">
-                    <div class="from-group">
-                        <label>Password</label>
-                        @Html.ValidationMessageFor(x => x.password, "", new { @class = "text-danger" })
-                        @Html.PasswordFor(x => x.password, new { @class = "form-control" })
-                    </div>
-                    <p>Already have a account @Html.ActionLink("Login", "Login", "Home")</p>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        @Html.LabelFor(x => x.Profilepic, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="file" name="file" id="file" style="width: 100%;" />
+                            @Html.ValidationMessageFor(x => x.Profilepic, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-            }
+                    <div class="container">
+                        <div class="from-group">
+                            <label>Roles</label>
+                            <div class=" input-group">
+                                @*@{
+                            List<SelectListItem> li = new List<SelectListItem>();
+                            li.Add(new SelectListItem() { Text = "Admin", Value = "20" });
+                            li.Add(new SelectListItem() { Text = "Seller", Value = "30" });
+                            li.Add(new SelectListItem() { Text = "Customer", Value = "40" });
+                        }
+                        @Html.DropDownList("Roles", li, "Select any role")
+                        @Html.ValidationMessageFor(model => model.<, "", new { @class = "text-danger" })*@
+
+                                @Html.DropDownList("Menu", new List<SelectListItem>
+                                {
+                                new SelectListItem { Text = "Admin", Value = "Admin"},
+                                new SelectListItem { Text = "Seller", Value = "Seller"},
+                                new SelectListItem { Text = "Customer", Value = "Customer"}
+                                }, "Select role")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="from-group">
+                            <label>Password</label>
+                            @Html.ValidationMessageFor(x => x.password, "", new { @class = "text-danger" })
+                            @Html.PasswordFor(x => x.password, new { @class = "form-control" })
+                        </div>
+                        <p>Already have a account @Html.ActionLink("Login", "Login", "Home")</p>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                }
+            </div>
+
+
+            <div id="imagess" class=" col-md-6">
+
+                <img src="~/images/log.png" class=" img-responsive" />
+
+            </div>
         </div>
 
 
-        <div id="imagess" class=" col-md-6">
 
-            <img src="~/images/log.png" class=" img-responsive" />
-
-        </div>
     </div>
-
-
-
-</div>
+}

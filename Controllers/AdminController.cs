@@ -10,12 +10,12 @@ using System.Web.Mvc;
 
 namespace OnlineHomeServices.Controllers
 {
-    
+    [Authorize]
     public class AdminController : Controller
     {
         // GET: Admin
         public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
-
+        dbOnlineHomeServicesEntities ctx = new dbOnlineHomeServicesEntities();
         public List<SelectListItem> GetCategory()
         {
             List<SelectListItem> list = new List<SelectListItem>();
@@ -26,6 +26,7 @@ namespace OnlineHomeServices.Controllers
             }
             return list;
         }
+       
         public ActionResult Dashboard()
         {
             return View();
@@ -99,6 +100,7 @@ namespace OnlineHomeServices.Controllers
         [HttpPost]
         public ActionResult ServiceAdd(Tbl_Service tbl, HttpPostedFileBase file)
         {
+            
             string pic = null;
             if (file != null)
             {
@@ -109,9 +111,89 @@ namespace OnlineHomeServices.Controllers
             }
             tbl.ServiceImage = pic;
             tbl.CreatedDate = DateTime.Now;
-            _unitOfWork.GetRepositoryInstance<Tbl_Service>().Add(tbl);
+            tbl.Username = User.Identity.Name;
+           _unitOfWork.GetRepositoryInstance<Tbl_Service>().Add(tbl);
             return RedirectToAction("Service");
         }
+        public ActionResult serviceDelete(int serviceId)
+        {
+            var res = ctx.Tbl_Service.Where(x => x.ServiceId == serviceId).First();
+            ctx.Tbl_Service.Remove(res);
+            ctx.SaveChanges();
+            return RedirectToAction("Service");
+        }
+        //User profile
+        public ActionResult profile()
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_User>().GetAllRecords());
+        }
+
+        [HttpPost]
+        public ActionResult profile(Tbl_User tbl, HttpPostedFileBase file)
+        {
+
+            string pic = null;
+            if (file != null)
+            {
+                pic = System.IO.Path.GetFileName(file.FileName);
+                string path = System.IO.Path.Combine(Server.MapPath("~/ServiceImg/"), pic);
+                // file is uploaded
+                file.SaveAs(path);
+            }
+            tbl.Profilepic = pic;
+            _unitOfWork.GetRepositoryInstance<Tbl_User>().Add(tbl);
+            return RedirectToAction("profile");
+        }
+        public ActionResult ShowRequest()
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+        }
+        public ActionResult AcceptOrder(int id)
+        {
+
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id));
+
+        }
+        [HttpPost]
+        public ActionResult AcceptOrder(Tbl_Orders obj)
+        {
+
+            obj.Status = "Approved";
+            obj.Address =
+             _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+ 
+         
+        }
+        public ActionResult RejectOrder(int id)
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id));
+
+        }
+        [HttpPost]
+        public ActionResult RejectOrder(Tbl_Orders obj)
+        {
+            obj.Status = "Rejected";
+            _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            return RedirectToAction("ShowRequest");
+        }
+
+
+        public ActionResult CompleteOrder(int id)
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id));
+
+        }
+        [HttpPost]
+        public ActionResult CompleteOrder(Tbl_Orders obj)
+        {
+            obj.Status = "Complete";
+            _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+        }
+
+
+
 
     }
 }

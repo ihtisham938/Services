@@ -1,0 +1,66 @@
+﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_Orders>
+
+
+@{
+    ViewBag.Title = "CompleteOrder";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>CompleteOrder</h2>
+
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        List of Orders
+        <a href="../Home/Index" class="btn btn-info pull-right fa fa-plus">Add New</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Service Name</th>
+                        <th>Seller</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Customer name.</th>
+                        <th>Address</th>
+                        <th>Phone number</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        if (item.SellerName == User.Identity.Name && item.Status == "Complete")
+                        {
+                            int count = 1;
+                            <tr>
+                                <td>@item.CustomerName</td>
+                                <td>@item.Address</td>
+                                <td>@item.Phone_number</td>
+                                <td>@item.Date</td>
+                                <td>
+                                    @Html.ActionLink("Review", "Reviews", new { id = item.id })
+                                   
+                                </td>
+
+                            </tr>
+                            count++;
+
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

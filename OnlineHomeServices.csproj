@@ -179,6 +179,9 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DAL\GetBySearch_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -209,6 +212,12 @@
     <Compile Include="DAL\Tbl_Members.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Tbl_Orders.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Tbl_review.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Tbl_Roles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -231,7 +240,9 @@
     <Compile Include="Models\CategoryDetail.cs" />
     <Compile Include="Models\Home\HomeIndexViewModel.cs" />
     <Compile Include="Models\Home\Item.cs" />
+    <Compile Include="Models\Home\person.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\locationModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Selection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -239,10 +250,12 @@
     <Compile Include="Repository\GenericUnitOfWork.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="WebRoleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminStyle\css\sb-admin.css" />
     <Content Include="AdminStyle\css\sb-admin.min.css" />
+    <Content Include="AdminStyle\css\Profile.css" />
     <Content Include="AdminStyle\js\demo\chart-area-demo.js" />
     <Content Include="AdminStyle\js\demo\chart-bar-demo.js" />
     <Content Include="AdminStyle\js\demo\chart-pie-demo.js" />
@@ -1811,9 +1824,18 @@
     <Content Include="Views\Home\ServiceDetails.cshtml" />
     <Content Include="Views\Home\Signup.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Admin\profile.cshtml" />
+    <Content Include="Views\Home\sendRequest.cshtml" />
+    <Content Include="Views\Home\Myorders.cshtml" />
+    <Content Include="Views\Home\SelectRole.cshtml" />
+    <Content Include="Views\Home\Loc.cshtml" />
+    <Content Include="Views\Admin\ShowRequest.cshtml" />
+    <Content Include="Views\Admin\CompleteOrder.cshtml" />
+    <Content Include="Views\Home\Reviewsseller.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ProfileImages\" />
     <Folder Include="ServiceImg\" />
   </ItemGroup>
   <ItemGroup>

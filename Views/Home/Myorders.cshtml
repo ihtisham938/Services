@@ -1,22 +1,25 @@
-﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_Service>
+﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_Orders>
 
 @{
-    ViewBag.Title = "Product";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Myorders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>My orders</h2>
 <div class="card mb-3">
     <div class="card-header">
         <i class="fas fa-table"></i>
-        List of Services
-        <a href="../Admin/ServiceAdd" class="btn btn-info pull-right fa fa-plus">Add New</a>
+        List of Orders
+        <a href="../Home/Index" class="btn btn-info pull-right fa fa-plus">Add New</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Sr. No.</th>    
+                        <th>Sr. No.</th>
                         <th>Service Name</th>
+                        <th>Seller</th>
                         <th>Action</th>
 
                     </tr>
@@ -25,29 +28,27 @@
                     <tr>
                         <th>Sr. No.</th>
                         <th>Service</th>
+                        <th>Seller</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        if (item.Username == User.Identity.Name)
-                        {
                             int count = 1;
                         <tr>
                             <td>@count</td>
-                            <td>@item.ProductName</td>
+                            <td>@item.Date</td>
+                            <td>@item.SellerName</td>
                             <td>
-
-                                @Html.ActionLink("Edit", "ServiceEdit", new { serviceId = item.ServiceId })
-                                @Html.ActionLink("Delete", "serviceDelete", new { serviceId = item.ServiceId })
+                                @Html.ActionLink("Delete", "DeleteOrder", new { id = item.id })
                             </td>
 
                         </tr>
                             count++;
-                        }
-                    }
 
+                        
+                    }
                 </tbody>
             </table>
         </div>

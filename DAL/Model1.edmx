@@ -52,13 +52,40 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="Tbl_Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="1000" />
+          <Property Name="SellerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="Long" Type="varchar" MaxLength="50" />
+          <Property Name="Lat" Type="varchar" MaxLength="50" />
+          <Property Name="Phone_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tbl_review">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Orderid" Type="int" />
+          <Property Name="rating" Type="int" />
+          <Property Name="Review" Type="nvarchar(max)" />
+          <Property Name="date" Type="date" />
+          <Property Name="reviwername" Type="nvarchar" MaxLength="50" />
+          <Property Name="reviewname" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Tbl_Roles">
           <Key>
-            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleName" Type="varchar" MaxLength="200" />
-          <Property Name="Userid" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Tbl_Service">
           <Key>
@@ -76,6 +103,7 @@
           <Property Name="IsFeatured" Type="bit" />
           <Property Name="Quantity" Type="int" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Tbl_ShippingDetails">
           <Key>
@@ -109,6 +137,7 @@
           <Property Name="Username" Type="nchar" MaxLength="50" />
           <Property Name="password" Type="nchar" MaxLength="50" />
           <Property Name="location" Type="nchar" MaxLength="50" />
+          <Property Name="Profilepic" Type="varchar(max)" />
         </EntityType>
         <Association Name="FK__Tbl_Cart__Servic__38996AB5">
           <End Role="Tbl_Service" Type="Self.Tbl_Service" Multiplicity="0..1" />
@@ -154,16 +183,21 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Tbl_Roles">
-              <PropertyRef Name="Userid" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="search" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="dbOnlineHomeServicesModelStoreContainer">
           <EntitySet Name="Tbl_Cart" EntityType="Self.Tbl_Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_CartStatus" EntityType="Self.Tbl_CartStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_MemberRole" EntityType="Self.Tbl_MemberRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Members" EntityType="Self.Tbl_Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Orders" EntityType="Self.Tbl_Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_review" EntityType="Self.Tbl_review" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Roles" EntityType="Self.Tbl_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Service" EntityType="Self.Tbl_Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_ShippingDetails" EntityType="Self.Tbl_ShippingDetails" Schema="dbo" store:Type="Tables" />
@@ -190,6 +224,58 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbOnlineHomeServicesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbOnlineHomeServicesEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="GetBySearch" ReturnType="Collection(dbOnlineHomeServicesModel.GetBySearch_Result)">
+          <Parameter Name="search" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Tbl_Cart" EntityType="dbOnlineHomeServicesModel.Tbl_Cart" />
+          <EntitySet Name="Tbl_CartStatus" EntityType="dbOnlineHomeServicesModel.Tbl_CartStatus" />
+          <EntitySet Name="Tbl_Category" EntityType="dbOnlineHomeServicesModel.Tbl_Category" />
+          <EntitySet Name="Tbl_MemberRole" EntityType="dbOnlineHomeServicesModel.Tbl_MemberRole" />
+          <EntitySet Name="Tbl_Members" EntityType="dbOnlineHomeServicesModel.Tbl_Members" />
+          <EntitySet Name="Tbl_Orders" EntityType="dbOnlineHomeServicesModel.Tbl_Orders" />
+          <EntitySet Name="Tbl_Roles" EntityType="dbOnlineHomeServicesModel.Tbl_Roles" />
+          <EntitySet Name="Tbl_Service" EntityType="dbOnlineHomeServicesModel.Tbl_Service" />
+          <EntitySet Name="Tbl_ShippingDetails" EntityType="dbOnlineHomeServicesModel.Tbl_ShippingDetails" />
+          <EntitySet Name="Tbl_SlideImage" EntityType="dbOnlineHomeServicesModel.Tbl_SlideImage" />
+          <EntitySet Name="Tbl_User" EntityType="dbOnlineHomeServicesModel.Tbl_User" />
+          <AssociationSet Name="FK__Tbl_Cart__Servic__38996AB5" Association="dbOnlineHomeServicesModel.FK__Tbl_Cart__Servic__38996AB5">
+            <End Role="Tbl_Service" EntitySet="Tbl_Service" />
+            <End Role="Tbl_Cart" EntitySet="Tbl_Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Servi__Categ__398D8EEE" Association="dbOnlineHomeServicesModel.FK__Tbl_Servi__Categ__398D8EEE">
+            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+            <End Role="Tbl_Service" EntitySet="Tbl_Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Shipp__Membe__3A81B327" Association="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327">
+            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
+            <End Role="Tbl_ShippingDetails" EntitySet="Tbl_ShippingDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Roles_Tbl_User" Association="dbOnlineHomeServicesModel.FK_Tbl_Roles_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Roles" EntitySet="Tbl_Roles" />
+          </AssociationSet>
+          <EntitySet Name="Tbl_review" EntityType="dbOnlineHomeServicesModel.Tbl_review" />
+          </EntityContainer>
+        <ComplexType Name="GetBySearch_Result">
+          <Property Type="Int32" Name="ServiceId" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="CategoryId" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="ServiceImage" Nullable="true" />
+          <Property Type="Boolean" Name="IsFeatured" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CategoryId1" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="IsActive1" Nullable="true" />
+          <Property Type="Boolean" Name="IsDelete1" Nullable="true" />
+        </ComplexType>
         <EntityType Name="Tbl_Cart">
           <Key>
             <PropertyRef Name="CartId" />
@@ -198,7 +284,7 @@
           <Property Name="ServiceId" Type="Int32" />
           <Property Name="MemberId" Type="Int32" />
           <Property Name="CartStatusId" Type="Int32" />
-          <NavigationProperty Name="Tbl_Service" Relationship="Self.FK__Tbl_Cart__Servic__38996AB5" FromRole="Tbl_Cart" ToRole="Tbl_Service" />
+          <NavigationProperty Name="Tbl_Service" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Cart__Servic__38996AB5" FromRole="Tbl_Cart" ToRole="Tbl_Service" />
         </EntityType>
         <EntityType Name="Tbl_CartStatus">
           <Key>
@@ -215,7 +301,7 @@
           <Property Name="CategoryName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsDelete" Type="Boolean" />
-          <NavigationProperty Name="Tbl_Service" Relationship="Self.FK__Tbl_Servi__Categ__398D8EEE" FromRole="Tbl_Category" ToRole="Tbl_Service" />
+          <NavigationProperty Name="Tbl_Service" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Servi__Categ__398D8EEE" FromRole="Tbl_Category" ToRole="Tbl_Service" />
         </EntityType>
         <EntityType Name="Tbl_MemberRole">
           <Key>
@@ -238,15 +324,30 @@
           <Property Name="IsDelete" Type="Boolean" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Tbl_ShippingDetails" Relationship="Self.FK__Tbl_Shipp__Membe__3A81B327" FromRole="Tbl_Members" ToRole="Tbl_ShippingDetails" />
+          <NavigationProperty Name="Tbl_ShippingDetails" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327" FromRole="Tbl_Members" ToRole="Tbl_ShippingDetails" />
+        </EntityType>
+        <EntityType Name="Tbl_Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="SellerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Long" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Lat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Tbl_Roles">
           <Key>
-            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Userid" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Tbl_User" Relationship="dbOnlineHomeServicesModel.FK_Tbl_Roles_Tbl_User" FromRole="Tbl_Roles" ToRole="Tbl_User" />
         </EntityType>
         <EntityType Name="Tbl_Service">
@@ -265,8 +366,9 @@
           <Property Name="IsFeatured" Type="Boolean" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Tbl_Cart" Relationship="Self.FK__Tbl_Cart__Servic__38996AB5" FromRole="Tbl_Service" ToRole="Tbl_Cart" />
-          <NavigationProperty Name="Tbl_Category" Relationship="Self.FK__Tbl_Servi__Categ__398D8EEE" FromRole="Tbl_Service" ToRole="Tbl_Category" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_Cart" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Cart__Servic__38996AB5" FromRole="Tbl_Service" ToRole="Tbl_Cart" />
+          <NavigationProperty Name="Tbl_Category" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Servi__Categ__398D8EEE" FromRole="Tbl_Service" ToRole="Tbl_Category" />
         </EntityType>
         <EntityType Name="Tbl_ShippingDetails">
           <Key>
@@ -282,7 +384,7 @@
           <Property Name="OrderId" Type="Int32" />
           <Property Name="AmountPaid" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Tbl_Members" Relationship="Self.FK__Tbl_Shipp__Membe__3A81B327" FromRole="Tbl_ShippingDetails" ToRole="Tbl_Members" />
+          <NavigationProperty Name="Tbl_Members" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327" FromRole="Tbl_ShippingDetails" ToRole="Tbl_Members" />
         </EntityType>
         <EntityType Name="Tbl_SlideImage">
           <Key>
@@ -292,9 +394,21 @@
           <Property Name="SlideTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="SlideImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Tbl_User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Profilepic" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Roles" Relationship="dbOnlineHomeServicesModel.FK_Tbl_Roles_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Roles" />
+        </EntityType>
         <Association Name="FK__Tbl_Cart__Servic__38996AB5">
-          <End Role="Tbl_Service" Type="Self.Tbl_Service" Multiplicity="0..1" />
-          <End Role="Tbl_Cart" Type="Self.Tbl_Cart" Multiplicity="*" />
+          <End Type="dbOnlineHomeServicesModel.Tbl_Service" Role="Tbl_Service" Multiplicity="0..1" />
+          <End Type="dbOnlineHomeServicesModel.Tbl_Cart" Role="Tbl_Cart" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tbl_Service">
               <PropertyRef Name="ServiceId" />
@@ -305,8 +419,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Tbl_Servi__Categ__398D8EEE">
-          <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="0..1" />
-          <End Role="Tbl_Service" Type="Self.Tbl_Service" Multiplicity="*" />
+          <End Type="dbOnlineHomeServicesModel.Tbl_Category" Role="Tbl_Category" Multiplicity="0..1" />
+          <End Type="dbOnlineHomeServicesModel.Tbl_Service" Role="Tbl_Service" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tbl_Category">
               <PropertyRef Name="CategoryId" />
@@ -317,8 +431,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Tbl_Shipp__Membe__3A81B327">
-          <End Role="Tbl_Members" Type="Self.Tbl_Members" Multiplicity="0..1" />
-          <End Role="Tbl_ShippingDetails" Type="Self.Tbl_ShippingDetails" Multiplicity="*" />
+          <End Type="dbOnlineHomeServicesModel.Tbl_Members" Role="Tbl_Members" Multiplicity="0..1" />
+          <End Type="dbOnlineHomeServicesModel.Tbl_ShippingDetails" Role="Tbl_ShippingDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tbl_Members">
               <PropertyRef Name="MemberId" />
@@ -328,45 +442,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dbOnlineHomeServicesEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Tbl_Cart" EntityType="Self.Tbl_Cart" />
-          <EntitySet Name="Tbl_CartStatus" EntityType="Self.Tbl_CartStatus" />
-          <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" />
-          <EntitySet Name="Tbl_MemberRole" EntityType="Self.Tbl_MemberRole" />
-          <EntitySet Name="Tbl_Members" EntityType="Self.Tbl_Members" />
-          <EntitySet Name="Tbl_Roles" EntityType="Self.Tbl_Roles" />
-          <EntitySet Name="Tbl_Service" EntityType="Self.Tbl_Service" />
-          <EntitySet Name="Tbl_ShippingDetails" EntityType="Self.Tbl_ShippingDetails" />
-          <EntitySet Name="Tbl_SlideImage" EntityType="Self.Tbl_SlideImage" />
-          <AssociationSet Name="FK__Tbl_Cart__Servic__38996AB5" Association="Self.FK__Tbl_Cart__Servic__38996AB5">
-            <End Role="Tbl_Service" EntitySet="Tbl_Service" />
-            <End Role="Tbl_Cart" EntitySet="Tbl_Cart" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Servi__Categ__398D8EEE" Association="Self.FK__Tbl_Servi__Categ__398D8EEE">
-            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
-            <End Role="Tbl_Service" EntitySet="Tbl_Service" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Shipp__Membe__3A81B327" Association="Self.FK__Tbl_Shipp__Membe__3A81B327">
-            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
-            <End Role="Tbl_ShippingDetails" EntitySet="Tbl_ShippingDetails" />
-          </AssociationSet>
-          <EntitySet Name="Tbl_User" EntityType="dbOnlineHomeServicesModel.Tbl_User" />
-          <AssociationSet Name="FK_Tbl_Roles_Tbl_User" Association="dbOnlineHomeServicesModel.FK_Tbl_Roles_Tbl_User">
-            <End Role="Tbl_User" EntitySet="Tbl_User" />
-            <End Role="Tbl_Roles" EntitySet="Tbl_Roles" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Tbl_User">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="location" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Tbl_Roles" Relationship="dbOnlineHomeServicesModel.FK_Tbl_Roles_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Roles" />
-        </EntityType>
         <Association Name="FK_Tbl_Roles_Tbl_User">
           <End Type="dbOnlineHomeServicesModel.Tbl_User" Role="Tbl_User" Multiplicity="1" />
           <End Type="dbOnlineHomeServicesModel.Tbl_Roles" Role="Tbl_Roles" Multiplicity="*" />
@@ -375,80 +450,31 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Tbl_Roles">
-              <PropertyRef Name="Userid" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="Tbl_review">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Orderid" Type="Int32" />
+          <Property Name="rating" Type="Int32" />
+          <Property Name="Review" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="reviwername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reviewname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="dbOnlineHomeServicesModelStoreContainer" CdmEntityContainer="dbOnlineHomeServicesEntities">
-          <EntitySetMapping Name="Tbl_Cart">
-            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Cart">
-              <MappingFragment StoreEntitySet="Tbl_Cart">
-                <ScalarProperty Name="CartId" ColumnName="CartId" />
-                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-                <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_CartStatus">
-            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_CartStatus">
-              <MappingFragment StoreEntitySet="Tbl_CartStatus">
-                <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
-                <ScalarProperty Name="CartStatus" ColumnName="CartStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_Category">
-            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Category">
-              <MappingFragment StoreEntitySet="Tbl_Category">
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_MemberRole">
-            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_MemberRole">
-              <MappingFragment StoreEntitySet="Tbl_MemberRole">
-                <ScalarProperty Name="MemberRoleID" ColumnName="MemberRoleID" />
-                <ScalarProperty Name="memberId" ColumnName="memberId" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_Members">
-            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Members">
-              <MappingFragment StoreEntitySet="Tbl_Members">
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-                <ScalarProperty Name="FristName" ColumnName="FristName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_Roles">
-            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Roles">
-              <MappingFragment StoreEntitySet="Tbl_Roles">
-                <ScalarProperty Name="Userid" ColumnName="Userid" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_Service">
-            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Service">
-              <MappingFragment StoreEntitySet="Tbl_Service">
+          <FunctionImportMapping FunctionImportName="GetBySearch" FunctionName="dbOnlineHomeServicesModel.Store.GetBySearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbOnlineHomeServicesModel.GetBySearch_Result">
                 <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
@@ -461,37 +487,139 @@
                 <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="CategoryId1" ColumnName="CategoryId1" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="IsActive1" ColumnName="IsActive1" />
+                <ScalarProperty Name="IsDelete1" ColumnName="IsDelete1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Tbl_Cart">
+            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Cart">
+              <MappingFragment StoreEntitySet="Tbl_Cart">
+                <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="CartId" ColumnName="CartId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_CartStatus">
+            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_CartStatus">
+              <MappingFragment StoreEntitySet="Tbl_CartStatus">
+                <ScalarProperty Name="CartStatus" ColumnName="CartStatus" />
+                <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Category">
+            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Category">
+              <MappingFragment StoreEntitySet="Tbl_Category">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_MemberRole">
+            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_MemberRole">
+              <MappingFragment StoreEntitySet="Tbl_MemberRole">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="memberId" ColumnName="memberId" />
+                <ScalarProperty Name="MemberRoleID" ColumnName="MemberRoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Members">
+            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Members">
+              <MappingFragment StoreEntitySet="Tbl_Members">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FristName" ColumnName="FristName" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Orders">
+            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Orders">
+              <MappingFragment StoreEntitySet="Tbl_Orders">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Phone_number" ColumnName="Phone_number" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Long" ColumnName="Long" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="SellerName" ColumnName="SellerName" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Roles">
+            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Roles">
+              <MappingFragment StoreEntitySet="Tbl_Roles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Service">
+            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Service">
+              <MappingFragment StoreEntitySet="Tbl_Service">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="ServiceImage" ColumnName="ServiceImage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tbl_ShippingDetails">
             <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_ShippingDetails">
               <MappingFragment StoreEntitySet="Tbl_ShippingDetails">
-                <ScalarProperty Name="ShippingDetailId" ColumnName="ShippingDetailId" />
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
                 <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="ShippingDetailId" ColumnName="ShippingDetailId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tbl_SlideImage">
             <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_SlideImage">
               <MappingFragment StoreEntitySet="Tbl_SlideImage">
-                <ScalarProperty Name="SlideId" ColumnName="SlideId" />
-                <ScalarProperty Name="SlideTitle" ColumnName="SlideTitle" />
                 <ScalarProperty Name="SlideImage" ColumnName="SlideImage" />
+                <ScalarProperty Name="SlideTitle" ColumnName="SlideTitle" />
+                <ScalarProperty Name="SlideId" ColumnName="SlideId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tbl_User">
             <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_User">
               <MappingFragment StoreEntitySet="Tbl_User">
+                <ScalarProperty Name="Profilepic" ColumnName="Profilepic" />
                 <ScalarProperty Name="location" ColumnName="location" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
@@ -500,7 +628,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Tbl_review">
+            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_review">
+              <MappingFragment StoreEntitySet="Tbl_review">
+                <ScalarProperty Name="reviewname" ColumnName="reviewname" />
+                <ScalarProperty Name="reviwername" ColumnName="reviwername" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="Orderid" ColumnName="Orderid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

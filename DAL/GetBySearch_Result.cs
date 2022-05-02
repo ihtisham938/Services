@@ -10,16 +10,9 @@
 namespace OnlineHomeServices.DAL
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Tbl_Service
+    public partial class GetBySearch_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_Service()
-        {
-            this.Tbl_Cart = new HashSet<Tbl_Cart>();
-        }
-    
         public int ServiceId { get; set; }
         public string ProductName { get; set; }
         public Nullable<int> CategoryId { get; set; }
@@ -33,9 +26,9 @@ namespace OnlineHomeServices.DAL
         public Nullable<int> Quantity { get; set; }
         public Nullable<decimal> Price { get; set; }
         public string Username { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Cart> Tbl_Cart { get; set; }
-        public virtual Tbl_Category Tbl_Category { get; set; }
+        public Nullable<int> CategoryId1 { get; set; }
+        public string CategoryName { get; set; }
+        public Nullable<bool> IsActive1 { get; set; }
+        public Nullable<bool> IsDelete1 { get; set; }
     }
 }
