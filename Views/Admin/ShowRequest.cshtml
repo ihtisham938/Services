@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>ShowRequest</h2>
+
 <h2>My orders</h2>
 <div class="card mb-3">
     <div class="card-header">
@@ -18,22 +18,15 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Sr. No.</th>
-                        <th>Service Name</th>
-                        <th>Seller</th>
-                        <th>Action</th>
-
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
                         <th>Customer name.</th>
                         <th>Address</th>
                         <th>Phone number</th>
                         <th>Date</th>
                         <th>Action</th>
+
                     </tr>
-                </tfoot>
+                </thead>
+           
                 <tbody>
                     @foreach (var item in Model)
                     {

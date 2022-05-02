@@ -1832,6 +1832,7 @@
     <Content Include="Views\Admin\ShowRequest.cshtml" />
     <Content Include="Views\Admin\CompleteOrder.cshtml" />
     <Content Include="Views\Home\Reviewsseller.cshtml" />
+    <Content Include="Views\Admin\AcceptOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

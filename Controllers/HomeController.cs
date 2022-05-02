@@ -282,14 +282,15 @@ namespace OnlineHomeServices.Controllers
 
             return View();
         }
-        public ActionResult Reviews()
+        public ActionResult Reviewsseller(int id)
         {
             return View();
         }
         [HttpPost]
-        public ActionResult Reviews(Tbl_review model, int id)
+        public ActionResult Reviewsseller(Tbl_review model, int id)
         {
             Tbl_review obj = new Tbl_review();
+            obj.Orderid = id;
             obj.date = DateTime.Now;
             obj.rating = model.rating;
             obj.Review = model.Review;
@@ -299,13 +300,14 @@ namespace OnlineHomeServices.Controllers
             {
                 if (item.id == id)
                 {
+
                     reviewrname = item.SellerName;
                     reviewedname = item.CustomerName;
 
                 }
             }
             obj.reviwername = reviewrname;
-            obj.reviwername = reviewedname;
+            obj.reviewname = reviewedname;
             ctx.Tbl_review.Add(obj);
             ctx.SaveChanges();
             return View();

@@ -148,49 +148,71 @@ namespace OnlineHomeServices.Controllers
         {
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
         }
+        //[HttpGet]
+        //public ActionResult AcceptOrder()
+        //{
+
+        //    return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+
+        //}
+        //[HttpPost]
         public ActionResult AcceptOrder(int id)
         {
 
-            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id));
+            Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
 
-        }
-        [HttpPost]
-        public ActionResult AcceptOrder(Tbl_Orders obj)
-        {
+
 
             obj.Status = "Approved";
-            obj.Address =
-             _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+
+            _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
- 
-         
+
+
+
+
         }
+
         public ActionResult RejectOrder(int id)
         {
-            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id));
+            Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
 
-        }
-        [HttpPost]
-        public ActionResult RejectOrder(Tbl_Orders obj)
-        {
-            obj.Status = "Rejected";
+
+
+            obj.Status = "Denied";
+
             _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
             return RedirectToAction("ShowRequest");
+
         }
 
+        //[HttpGet]
+        //public ActionResult CompleteOrder()
+        //{
 
+        //    return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+
+        //}
+        //[HttpPost]
         public ActionResult CompleteOrder(int id)
         {
-            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id));
+          
 
-        }
-        [HttpPost]
-        public ActionResult CompleteOrder(Tbl_Orders obj)
-        {
+            Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+
+
+
             obj.Status = "Complete";
+
             _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+                
+
+
+
+
         }
+
 
 
 
