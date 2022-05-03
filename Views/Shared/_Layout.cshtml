@@ -72,9 +72,12 @@
                     <ul class="nav nav-pills">
                         <li class="active"><a style="border-radius:initial;" href="#">Home</a></li>
                         <li><a style="border-radius:initial;" href="#">Location</a></li>
+                        <li><a style="border-radius:initial;" href="#">My orders</a></li>
+                        <li><a style="border-radius:initial;" href="#">Completed orders</a></li>
                         <li><a style="border-radius:initial;" href="#">About</a></li>
-                        @if (User.Identity.IsAuthenticated) { 
-                        <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
                         }
                     </ul>
                 </div>

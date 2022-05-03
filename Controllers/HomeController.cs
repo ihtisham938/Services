@@ -312,5 +312,62 @@ namespace OnlineHomeServices.Controllers
             ctx.SaveChanges();
             return View();
         }
+
+
+        public ActionResult CustomerOrder()
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+        }
+        public ActionResult CancelOrder(int id)
+        {
+            Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+
+
+
+            obj.Status = "Denied";
+
+            _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            return RedirectToAction("CustomerOrder");
+
+        }
+
+
+
+        public ActionResult ReviewByCustomer(int id)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ReviewByCustomer(Tbl_review model, int id)
+        {
+            Tbl_review obj = new Tbl_review();
+            obj.Orderid = id;
+            obj.date = DateTime.Now;
+            obj.rating = model.rating;
+            obj.Review = model.Review;
+            String reviewrname = "";
+            String reviewedname = "";
+            foreach (var item in ctx.Tbl_Orders)
+            {
+                if (item.id == id)
+                {
+
+                     reviewedname = item.SellerName;
+                    reviewrname = item.CustomerName;
+
+                }
+            }
+            obj.reviwername = reviewrname;
+            obj.reviewname = reviewedname;
+            ctx.Tbl_review.Add(obj);
+            ctx.SaveChanges();
+            return View();
+        }
+
+        public ActionResult Ordercompleted()
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+        }
+
     }
 }

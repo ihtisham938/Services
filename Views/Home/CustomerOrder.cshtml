@@ -1,0 +1,59 @@
+﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_Orders>
+@{
+    ViewBag.Title = "Home Page";
+}
+<h2>Accepted Order</h2>
+
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        List of Orders
+        <a href="../Home/Index" class="btn btn-info pull-right fa fa-plus">Make New Request</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Customer name.</th>
+                        <th>Description</th>
+                        <th>Address</th>
+                        <th>Phone number</th>
+                        <th>Date</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        if(item.CustomerName == User.Identity.Name && (item.Status == "Pending" || item.Status == "Approved"))
+                        {
+                            int count = 1;
+                    <tr>
+                        <td>@item.CustomerName</td>
+                        <td>@item.description</td>
+                        <td>@item.Address</td>
+                        <td>@item.Phone_number</td>
+                        <td>@item.Date</td>
+                        <td>
+                            @Html.ActionLink("Cancel", "CancelOrder", new { id = item.id })
+
+                        </td>
+
+                    </tr>
+                            count++;
+
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
