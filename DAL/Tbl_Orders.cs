@@ -24,5 +24,6 @@ namespace OnlineHomeServices.DAL
         public string Lat { get; set; }
         public string Phone_number { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<int> orderprice { get; set; }
     }
 }

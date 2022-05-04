@@ -29,7 +29,7 @@ namespace OnlineHomeServices.Controllers
        
         public ActionResult Dashboard()
         {
-            return View();
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
         }
 
 

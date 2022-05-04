@@ -1,8 +1,81 @@
-﻿
+﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_Orders>
 @{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Dashboard</h2>
 
+
+<h2>Dashboard</h2>
+<link rel="stylesheet" href="dashboard.css" />
+<tbody>
+   
+
+    @{ 
+        int totalorder = 0;
+        int totalCompleteorder = 0;
+        int AcceptedOrder = 0;
+        int ? revinew = 0;
+        foreach (var item in Model)
+        {
+
+            if (item.SellerName == User.Identity.Name)
+            {
+
+                totalorder += 1;
+                if (item.Status == "Complete")
+                {
+                    totalCompleteorder += 1;
+                    if (item.orderprice.HasValue)
+                    {
+                        revinew += item.orderprice;
+                    }
+
+                }
+                if (item.Status == "Accepted")
+                {
+                    AcceptedOrder += 1;
+
+                }
+
+
+            }
+        }
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card-counter primary">
+                    <i class="fa fa-code-fork"></i>
+                    <span class="count-numbers">@totalorder</span>
+                    <span class="count-name">Total Orders</span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card-counter danger">
+                    <i class="fa fa-ticket"></i>
+                    <span class="count-numbers">@AcceptedOrder</span>
+                    <span class="count-name">Accepted Orders</span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card-counter success">
+                    <i class="fa fa-database"></i>
+                    <span class="count-numbers">@totalCompleteorder</span>
+                    <span class="count-name">Completed Order</span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card-counter info">
+                    <i class="fa fa-users"></i>
+                    <span class="count-numbers">@revinew</span>
+                    <span class="count-name">Total Revenue</span>
+                </div>
+            </div>
+        </div>
+    </div>
+        }
+</tbody>

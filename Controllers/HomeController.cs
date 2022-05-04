@@ -141,7 +141,6 @@ namespace OnlineHomeServices.Controllers
         public ActionResult addSignup(Tbl_User model, HttpPostedFileBase file, FormCollection objfrm)
         {
 
-            
             Tbl_User obj1 = new Tbl_User();
             string pic = null;
             if (file != null)

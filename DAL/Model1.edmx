@@ -66,6 +66,7 @@
           <Property Name="Lat" Type="varchar" MaxLength="50" />
           <Property Name="Phone_number" Type="nvarchar" MaxLength="50" />
           <Property Name="Date" Type="datetime" />
+          <Property Name="orderprice" Type="int" />
         </EntityType>
         <EntityType Name="Tbl_review">
           <Key>
@@ -234,6 +235,7 @@
           <EntitySet Name="Tbl_MemberRole" EntityType="dbOnlineHomeServicesModel.Tbl_MemberRole" />
           <EntitySet Name="Tbl_Members" EntityType="dbOnlineHomeServicesModel.Tbl_Members" />
           <EntitySet Name="Tbl_Orders" EntityType="dbOnlineHomeServicesModel.Tbl_Orders" />
+          <EntitySet Name="Tbl_review" EntityType="dbOnlineHomeServicesModel.Tbl_review" />
           <EntitySet Name="Tbl_Roles" EntityType="dbOnlineHomeServicesModel.Tbl_Roles" />
           <EntitySet Name="Tbl_Service" EntityType="dbOnlineHomeServicesModel.Tbl_Service" />
           <EntitySet Name="Tbl_ShippingDetails" EntityType="dbOnlineHomeServicesModel.Tbl_ShippingDetails" />
@@ -247,7 +249,7 @@
             <End Role="Tbl_Category" EntitySet="Tbl_Category" />
             <End Role="Tbl_Service" EntitySet="Tbl_Service" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Shipp__Membe__3A81B327" Association="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327">
+          <AssociationSet Name="FK__Tbl_Shipp__Membe__412EB0B6" Association="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__412EB0B6">
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
             <End Role="Tbl_ShippingDetails" EntitySet="Tbl_ShippingDetails" />
           </AssociationSet>
@@ -255,7 +257,6 @@
             <End Role="Tbl_User" EntitySet="Tbl_User" />
             <End Role="Tbl_Roles" EntitySet="Tbl_Roles" />
           </AssociationSet>
-          <EntitySet Name="Tbl_review" EntityType="dbOnlineHomeServicesModel.Tbl_review" />
           </EntityContainer>
         <ComplexType Name="GetBySearch_Result">
           <Property Type="Int32" Name="ServiceId" Nullable="false" />
@@ -324,7 +325,7 @@
           <Property Name="IsDelete" Type="Boolean" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Tbl_ShippingDetails" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327" FromRole="Tbl_Members" ToRole="Tbl_ShippingDetails" />
+          <NavigationProperty Name="Tbl_ShippingDetails" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__412EB0B6" FromRole="Tbl_Members" ToRole="Tbl_ShippingDetails" />
         </EntityType>
         <EntityType Name="Tbl_Orders">
           <Key>
@@ -340,6 +341,19 @@
           <Property Name="Lat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="orderprice" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Tbl_review">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Orderid" Type="Int32" />
+          <Property Name="rating" Type="Int32" />
+          <Property Name="Review" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="reviwername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reviewname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Tbl_Roles">
           <Key>
@@ -384,7 +398,7 @@
           <Property Name="OrderId" Type="Int32" />
           <Property Name="AmountPaid" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Tbl_Members" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327" FromRole="Tbl_ShippingDetails" ToRole="Tbl_Members" />
+          <NavigationProperty Name="Tbl_Members" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__412EB0B6" FromRole="Tbl_ShippingDetails" ToRole="Tbl_Members" />
         </EntityType>
         <EntityType Name="Tbl_SlideImage">
           <Key>
@@ -398,7 +412,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
@@ -430,7 +444,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_Shipp__Membe__3A81B327">
+        <Association Name="FK__Tbl_Shipp__Membe__412EB0B6">
           <End Type="dbOnlineHomeServicesModel.Tbl_Members" Role="Tbl_Members" Multiplicity="0..1" />
           <End Type="dbOnlineHomeServicesModel.Tbl_ShippingDetails" Role="Tbl_ShippingDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -454,18 +468,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Tbl_review">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Orderid" Type="Int32" />
-          <Property Name="rating" Type="Int32" />
-          <Property Name="Review" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="date" Type="DateTime" Precision="0" />
-          <Property Name="reviwername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="reviewname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -550,6 +552,7 @@
           <EntitySetMapping Name="Tbl_Orders">
             <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Orders">
               <MappingFragment StoreEntitySet="Tbl_Orders">
+                <ScalarProperty Name="orderprice" ColumnName="orderprice" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Phone_number" ColumnName="Phone_number" />
                 <ScalarProperty Name="Lat" ColumnName="Lat" />
@@ -559,6 +562,19 @@
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="SellerName" ColumnName="SellerName" />
                 <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_review">
+            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_review">
+              <MappingFragment StoreEntitySet="Tbl_review">
+                <ScalarProperty Name="reviewname" ColumnName="reviewname" />
+                <ScalarProperty Name="reviwername" ColumnName="reviwername" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="Orderid" ColumnName="Orderid" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -624,19 +640,6 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_review">
-            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_review">
-              <MappingFragment StoreEntitySet="Tbl_review">
-                <ScalarProperty Name="reviewname" ColumnName="reviewname" />
-                <ScalarProperty Name="reviwername" ColumnName="reviwername" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="Review" ColumnName="Review" />
-                <ScalarProperty Name="rating" ColumnName="rating" />
-                <ScalarProperty Name="Orderid" ColumnName="Orderid" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

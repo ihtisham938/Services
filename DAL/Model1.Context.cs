@@ -33,12 +33,12 @@ namespace OnlineHomeServices.DAL
         public virtual DbSet<Tbl_MemberRole> Tbl_MemberRole { get; set; }
         public virtual DbSet<Tbl_Members> Tbl_Members { get; set; }
         public virtual DbSet<Tbl_Orders> Tbl_Orders { get; set; }
+        public virtual DbSet<Tbl_review> Tbl_review { get; set; }
         public virtual DbSet<Tbl_Roles> Tbl_Roles { get; set; }
         public virtual DbSet<Tbl_Service> Tbl_Service { get; set; }
         public virtual DbSet<Tbl_ShippingDetails> Tbl_ShippingDetails { get; set; }
         public virtual DbSet<Tbl_SlideImage> Tbl_SlideImage { get; set; }
         public virtual DbSet<Tbl_User> Tbl_User { get; set; }
-        public virtual DbSet<Tbl_review> Tbl_review { get; set; }
     
         public virtual ObjectResult<GetBySearch_Result> GetBySearch(string search)
         {
