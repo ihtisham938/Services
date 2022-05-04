@@ -161,14 +161,10 @@ namespace OnlineHomeServices.Controllers
 
             Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
 
-
-
             obj.Status = "Approved";
 
             _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
-
-
 
 
         }
@@ -199,11 +195,7 @@ namespace OnlineHomeServices.Controllers
           
 
             Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
-
-
-
             obj.Status = "Complete";
-
             _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
                 

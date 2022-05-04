@@ -30,7 +30,7 @@
                     @foreach (var item in Model)
                     {
 
-                        if (item.CustomerName == User.Identity.Name &&  item.Status == "Complete")
+                        if (item.CustomerName == User.Identity.Name &&  item.Status == "Approved")
                                 {
                             int count = 1;
                             <tr>

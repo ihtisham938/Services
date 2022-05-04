@@ -321,18 +321,12 @@ namespace OnlineHomeServices.Controllers
         public ActionResult CancelOrder(int id)
         {
             Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
-
-
-
             obj.Status = "Denied";
 
             _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
             return RedirectToAction("CustomerOrder");
 
         }
-
-
-
         public ActionResult ReviewByCustomer(int id)
         {
             return View();
