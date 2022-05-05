@@ -188,9 +188,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="GetBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="search" Type="nvarchar(max)" Mode="In" />
-        </Function>
         <EntityContainer Name="dbOnlineHomeServicesModelStoreContainer">
           <EntitySet Name="Tbl_Cart" EntityType="Self.Tbl_Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_CartStatus" EntityType="Self.Tbl_CartStatus" Schema="dbo" store:Type="Tables" />
@@ -226,9 +223,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="dbOnlineHomeServicesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="dbOnlineHomeServicesEntities" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="GetBySearch" ReturnType="Collection(dbOnlineHomeServicesModel.GetBySearch_Result)">
-          <Parameter Name="search" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="Tbl_Cart" EntityType="dbOnlineHomeServicesModel.Tbl_Cart" />
           <EntitySet Name="Tbl_CartStatus" EntityType="dbOnlineHomeServicesModel.Tbl_CartStatus" />
           <EntitySet Name="Tbl_Category" EntityType="dbOnlineHomeServicesModel.Tbl_Category" />
@@ -249,7 +243,7 @@
             <End Role="Tbl_Category" EntitySet="Tbl_Category" />
             <End Role="Tbl_Service" EntitySet="Tbl_Service" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Shipp__Membe__412EB0B6" Association="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__412EB0B6">
+          <AssociationSet Name="FK__Tbl_Shipp__Membe__3A81B327" Association="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327">
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
             <End Role="Tbl_ShippingDetails" EntitySet="Tbl_ShippingDetails" />
           </AssociationSet>
@@ -257,26 +251,7 @@
             <End Role="Tbl_User" EntitySet="Tbl_User" />
             <End Role="Tbl_Roles" EntitySet="Tbl_Roles" />
           </AssociationSet>
-          </EntityContainer>
-        <ComplexType Name="GetBySearch_Result">
-          <Property Type="Int32" Name="ServiceId" Nullable="false" />
-          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="CategoryId" Nullable="true" />
-          <Property Type="Boolean" Name="IsActive" Nullable="true" />
-          <Property Type="Boolean" Name="IsDelete" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="ServiceImage" Nullable="true" />
-          <Property Type="Boolean" Name="IsFeatured" Nullable="true" />
-          <Property Type="Int32" Name="Quantity" Nullable="true" />
-          <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="CategoryId1" Nullable="true" />
-          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="500" />
-          <Property Type="Boolean" Name="IsActive1" Nullable="true" />
-          <Property Type="Boolean" Name="IsDelete1" Nullable="true" />
-        </ComplexType>
+        </EntityContainer>
         <EntityType Name="Tbl_Cart">
           <Key>
             <PropertyRef Name="CartId" />
@@ -325,7 +300,7 @@
           <Property Name="IsDelete" Type="Boolean" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Tbl_ShippingDetails" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__412EB0B6" FromRole="Tbl_Members" ToRole="Tbl_ShippingDetails" />
+          <NavigationProperty Name="Tbl_ShippingDetails" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327" FromRole="Tbl_Members" ToRole="Tbl_ShippingDetails" />
         </EntityType>
         <EntityType Name="Tbl_Orders">
           <Key>
@@ -342,18 +317,6 @@
           <Property Name="Phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="orderprice" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Tbl_review">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Orderid" Type="Int32" />
-          <Property Name="rating" Type="Int32" />
-          <Property Name="Review" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="date" Type="DateTime" Precision="0" />
-          <Property Name="reviwername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="reviewname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Tbl_review">
           <Key>
@@ -410,7 +373,7 @@
           <Property Name="OrderId" Type="Int32" />
           <Property Name="AmountPaid" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Tbl_Members" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__412EB0B6" FromRole="Tbl_ShippingDetails" ToRole="Tbl_Members" />
+          <NavigationProperty Name="Tbl_Members" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327" FromRole="Tbl_ShippingDetails" ToRole="Tbl_Members" />
         </EntityType>
         <EntityType Name="Tbl_SlideImage">
           <Key>
@@ -456,7 +419,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_Shipp__Membe__412EB0B6">
+        <Association Name="FK__Tbl_Shipp__Membe__3A81B327">
           <End Type="dbOnlineHomeServicesModel.Tbl_Members" Role="Tbl_Members" Multiplicity="0..1" />
           <End Type="dbOnlineHomeServicesModel.Tbl_ShippingDetails" Role="Tbl_ShippingDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -480,35 +443,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="dbOnlineHomeServicesModelStoreContainer" CdmEntityContainer="dbOnlineHomeServicesEntities">
-          <FunctionImportMapping FunctionImportName="GetBySearch" FunctionName="dbOnlineHomeServicesModel.Store.GetBySearch">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="dbOnlineHomeServicesModel.GetBySearch_Result">
-                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ServiceImage" ColumnName="ServiceImage" />
-                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="CategoryId1" ColumnName="CategoryId1" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="IsActive1" ColumnName="IsActive1" />
-                <ScalarProperty Name="IsDelete1" ColumnName="IsDelete1" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="Tbl_Cart">
             <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Cart">
               <MappingFragment StoreEntitySet="Tbl_Cart">
@@ -656,7 +596,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

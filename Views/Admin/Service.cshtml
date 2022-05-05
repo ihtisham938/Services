@@ -17,6 +17,7 @@
                     <tr>
                         <th>Sr. No.</th>    
                         <th>Service Name</th>
+                        <th>Date</th>
                         <th class=" text-center">Action</th>
 
                     </tr>
@@ -25,22 +26,29 @@
                     <tr>
                         <th>Sr. No.</th>
                         <th>Service</th>
+                        <th>Date</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>
                 <tbody>
+
                     @foreach (var item in Model)
                     {
+                        int count = 1;
+
                         if (item.Username == User.Identity.Name)
                         {
-                            int count = 1;
+
+
                     <tr>
                         <td>@count</td>
                         <td>@item.ProductName</td>
-                        <td class="text-center"><a class='btn btn-info btn-xs' @Html.ActionLink("Edit", "ServiceEdit", new { serviceId = item.ServiceId })></a> <a class="btn btn-danger btn-xs" @Html.ActionLink("Delete", "serviceDelete", new { serviceId = item.ServiceId })> </a></td>
-
+                        <td>@item.CreatedDate</td>
+                        <td class="text-center"><a class='btn btn-info btn-xs' @Html.ActionLink("Edit", "ServiceEdit", new { serviceId = item.ServiceId }) ></a> <a class="btn btn-danger btn-xs" @Html.ActionLink("Delete", "serviceDelete", new { serviceId = item.ServiceId })> </a></td>
+                        
                     </tr>
-                            count++;
+                     count++;
+
                         }
                     }
 

@@ -110,12 +110,24 @@
 
         </footer>
     </div>
+    
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    
+
 </body>
-    
+<script>
+    $(".ratingStar").hover(function () {
+        $(".ratingStar").addClass("far").removeClass("fas");
+        $(this).addClass("fas").removeClass("far");
+        $(this).prevAll(".ratingStar").addClass("fas").removeClass("far");
+    });
+    $(".ratingStar").click(function () {
+        debugger; 
+        var starValue = $(this).attr("data-value");
+        $("#ratingValue").val(starValue);
+    });
+</script>
 </html>
     

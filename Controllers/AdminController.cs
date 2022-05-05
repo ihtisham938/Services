@@ -198,15 +198,8 @@ namespace OnlineHomeServices.Controllers
             obj.Status = "Complete";
             _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
-                
-
-
-
 
         }
-
-
-
 
 
     }
