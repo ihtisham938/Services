@@ -281,37 +281,7 @@ namespace OnlineHomeServices.Controllers
 
             return View();
         }
-        public ActionResult Reviewsseller(int id)
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Reviewsseller(Tbl_review model, int id)
-        {
-            Tbl_review obj = new Tbl_review();
-            obj.Orderid = id;
-            obj.date = DateTime.Now;
-            obj.rating = model.rating;
-            obj.Review = model.Review;
-            String reviewrname = "";
-            String reviewedname = "";
-            foreach (var item in ctx.Tbl_Orders)
-            {
-                if (item.id == id)
-                {
-
-                    reviewrname = item.SellerName;
-                    reviewedname = item.CustomerName;
-
-                }
-            }
-            obj.reviwername = reviewrname;
-            obj.reviewname = reviewedname;
-            ctx.Tbl_review.Add(obj);
-            ctx.SaveChanges();
-            return View();
-        }
-
+       
 
         public ActionResult CustomerOrder()
         {

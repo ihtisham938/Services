@@ -182,25 +182,56 @@ namespace OnlineHomeServices.Controllers
 
         }
 
-        //[HttpGet]
-        //public ActionResult CompleteOrder()
-        //{
 
-        //    return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
-
-        //}
-        //[HttpPost]
-        public ActionResult CompleteOrder(int id)
+        public ActionResult OrdercompleteAdmin()
         {
-          
 
-            Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
-            obj.Status = "Complete";
-            _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
 
         }
+        [HttpPost]
+        public ActionResult OrdercompleteAdmin(int id)
 
+
+        { 
+                Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+                obj.Status = "Complete";
+                _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+                return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+            
+
+        }
+
+        public ActionResult Reviewsseller(int id)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Reviewsseller(Tbl_review model, int id)
+        {
+            Tbl_review obj = new Tbl_review();
+            obj.Orderid = id;
+            obj.date = DateTime.Now;
+            obj.rating = model.rating;
+            obj.Review = model.Review;
+            String reviewrname = "";
+            String reviewedname = "";
+            foreach (var item in ctx.Tbl_Orders)
+            {
+                if (item.id == id)
+                {
+
+                    reviewrname = item.SellerName;
+                    reviewedname = item.CustomerName;
+
+                }
+            }
+            obj.reviwername = reviewrname;
+            obj.reviewname = reviewedname;
+            ctx.Tbl_review.Add(obj);
+            ctx.SaveChanges();
+            return View();
+        }
 
     }
 }

@@ -257,6 +257,7 @@
     <Content Include="AdminStyle\js\demo\chart-bar-demo.js" />
     <Content Include="AdminStyle\js\demo\chart-pie-demo.js" />
     <Content Include="AdminStyle\js\demo\datatables-demo.js" />
+    <Content Include="AdminStyle\js\location.js" />
     <Content Include="AdminStyle\js\sb-admin.js" />
     <Content Include="AdminStyle\js\sb-admin.min.js" />
     <Content Include="AdminStyle\vendor\bootstrap\css\bootstrap-grid.css" />
@@ -1675,6 +1676,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="DAL\Model1.edmx.sql" />
     <Content Include="DAL\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -1828,11 +1830,12 @@
     <Content Include="Views\Home\SelectRole.cshtml" />
     <Content Include="Views\Home\Loc.cshtml" />
     <Content Include="Views\Admin\ShowRequest.cshtml" />
-    <Content Include="Views\Home\Reviewsseller.cshtml" />
+    <Content Include="Views\Admin\Reviewsseller.cshtml" />
     <Content Include="Views\Admin\AcceptOrder.cshtml" />
     <Content Include="Views\Home\CustomerOrder.cshtml" />
     <Content Include="Views\Home\Ordercompleted.cshtml" />
     <Content Include="Views\Home\ReviewByCustomer.cshtml" />
+    <Content Include="Views\Admin\OrdercompleteAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
