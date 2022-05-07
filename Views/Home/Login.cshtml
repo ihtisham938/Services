@@ -22,14 +22,17 @@
         padding-top: .5em
     }
 </style>
+@{var returnUrl = Context.Request.QueryString["ReturnUrl"];
+    <form asp-route-returnurl="@returnUrl" method="post">
+    
 
-<p class=" error">@ViewBag.error</p>
-<div class="container">
-    <div class="row">
-        <div class=" col-md-6">
-            <h2 class="title">Login</h2>
-            @using (Html.BeginForm("Login", "Home", FormMethod.Post))
-            {
+    <p class=" error">@ViewBag.error</p>
+
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-6">
+                <h2 class="title">Login</h2>
+
                 <div class="container">
                     <div class="from-group">
                         <label>Username</label>
@@ -39,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-                
+
 
 
                 <div class="container">
@@ -52,20 +55,20 @@
 
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="submit" class="btn btn-success">Save</button>
                     </div>
                 </div>
                 <div>
-                    @Html.ActionLink("Do not have accout?", "Signup");
+                    @Html.ActionLink("Do not have accout?", "Signup")
                 </div>
-
+</form>
             }
 
         </div>
 
         <div id="imagess" class=" col-md-6">
 
-            <img src="~/images/log.png" class=" img-responsive" />
+            <img src="~/Images/log.png" class=" img-responsive" />
 
         </div>
     </div>

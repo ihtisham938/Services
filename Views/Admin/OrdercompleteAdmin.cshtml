@@ -1,5 +1,4 @@
-﻿@model OnlineHomeServices.DAL.Tbl_Orders
-
+﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_Orders>
 @{
     ViewBag.Title = "OrdercompleteAdmin";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -31,7 +30,7 @@
                     @foreach (var item in Model)
                     {
 
-                        if (item.CustomerName == User.Identity.Name && item.Status == "Complete")
+                        if (item.SellerName== User.Identity.Name && item.Status == "Complete")
                         {
                             int count = 1;
                             <tr>

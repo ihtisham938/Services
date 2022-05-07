@@ -8,6 +8,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using System.Data.Entity;
+
+
+
 namespace OnlineHomeServices.Controllers
 {
     [Authorize]
@@ -144,28 +148,69 @@ namespace OnlineHomeServices.Controllers
             _unitOfWork.GetRepositoryInstance<Tbl_User>().Add(tbl);
             return RedirectToAction("profile");
         }
+
+        //Requests of orders
+        
         public ActionResult ShowRequest()
         {
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
         }
-        //[HttpGet]
+
         //public ActionResult AcceptOrder()
-        //{
-
+        //{ 
         //    return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
-
+            
         //}
         //[HttpPost]
         public ActionResult AcceptOrder(int id)
         {
+            
+                //ctx.Entry(ctx.Tbl_Orders).Property("id").IsModified = false;
+                //ctx.Entry(ctx.Tbl_Orders).Property("description").IsModified = false;
+                //ctx.Entry(ctx.Tbl_Orders).Property("SellerName").IsModified = false;
+                //ctx.Entry(ctx.Tbl_Orders).Property("CustomerName").IsModified = false;
 
-            Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+                //ctx.Entry(ctx.Tbl_Orders).Property("Address").IsModified = false;
+                //ctx.Entry(ctx.Tbl_Orders).Property("Long").IsModified = false;
+                //ctx.Entry(ctx.Tbl_Orders).Property("Lat").IsModified = false;
+                //ctx.Entry(ctx.Tbl_Orders).Property("Phone_number").IsModified = false;
 
-            obj.Status = "Approved";
+                //ctx.Entry(ctx.Tbl_Orders).Property("Date").IsModified = false;
+                //ctx.Entry(ctx.Tbl_Orders).Property("orderprice").IsModified = false;
+                Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+            Tbl_Orders obj1 = new Tbl_Orders();
+            obj1 = obj;
+             
+                obj.description = obj1.description;
+                obj.SellerName = obj1.SellerName;
+                obj.CustomerName = obj1.CustomerName;
+                obj.Address = obj1.Address;
+                obj.Long= obj1.Long;
+                obj.Lat = obj1.Lat;
+                obj.Phone_number = obj1.Phone_number;
+                obj.orderprice = obj1.orderprice;
+                obj.Date = obj1.Date;
 
-            _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+
+
+
+                obj.Status = "Approved";
+               
+                _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+                ctx.SaveChanges();
+
+                
+
+
+
+
+
+            
+
+            //Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+            //obj.Status = "Approved";
+            //_unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
-
 
         }
 
@@ -183,23 +228,55 @@ namespace OnlineHomeServices.Controllers
         }
 
 
-        public ActionResult OrdercompleteAdmin()
-        {
+        //public ActionResult OrdercompleteAdmin()
+        //{
+        //    return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
 
-            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
-
-        }
-        [HttpPost]
+        //}
+        //[HttpPost]
         public ActionResult OrdercompleteAdmin(int id)
+          {
+            //    Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+            //    obj.Status = "Complete";
+            //    _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            //return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
 
 
-        { 
-                Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
-                obj.Status = "Complete";
-                _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
-                return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
-            
 
+            Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+            Tbl_Orders obj1 = new Tbl_Orders();
+            obj1 = obj;
+
+            obj.description = obj1.description;
+            obj.SellerName = obj1.SellerName;
+            obj.CustomerName = obj1.CustomerName;
+            obj.Address = obj1.Address;
+            obj.Long = obj1.Long;
+            obj.Lat = obj1.Lat;
+            obj.Phone_number = obj1.Phone_number;
+            obj.orderprice = obj1.orderprice;
+            obj.Date = obj1.Date;
+
+
+
+
+            obj.Status = "Complete";
+
+            _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            ctx.SaveChanges();
+
+
+
+
+
+
+
+
+
+            //Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+            //obj.Status = "Approved";
+            //_unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
         }
 
         public ActionResult Reviewsseller(int id)
@@ -232,6 +309,8 @@ namespace OnlineHomeServices.Controllers
             ctx.SaveChanges();
             return View();
         }
+
+       
 
     }
 }

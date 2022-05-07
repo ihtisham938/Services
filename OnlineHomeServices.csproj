@@ -1836,6 +1836,11 @@
     <Content Include="Views\Home\Ordercompleted.cshtml" />
     <Content Include="Views\Home\ReviewByCustomer.cshtml" />
     <Content Include="Views\Admin\OrdercompleteAdmin.cshtml" />
+    <Content Include="Views\Home\customerprofile.cshtml" />
+    <Content Include="Views\Shared\_LayoutReviews.cshtml" />
+    <Content Include="Views\Admin\Rederedcustomerprofile.cshtml" />
+    <Content Include="Views\Home\Rederedcustomerprofile.cshtml" />
+    <Content Include="Views\Home\reviewrender.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

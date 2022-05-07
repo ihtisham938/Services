@@ -204,7 +204,8 @@ namespace OnlineHomeServices.Controllers
             if (obj1 != null)
             {
                 FormsAuthentication.SetAuthCookie(obj1.Username, false);
-                if (Url.IsLocalUrl(returnUrl)&&returnUrl.Length>1&&returnUrl.StartsWith("/")&& !returnUrl.StartsWith("//")&& !returnUrl.StartsWith("/\\"))
+                //if (Url.IsLocalUrl(returnUrl)&&returnUrl.Length>1&&returnUrl.StartsWith("/")&& !returnUrl.StartsWith("//")&& !returnUrl.StartsWith("/\\"))
+                if (!string.IsNullOrEmpty(returnUrl))
                 {
                     return Redirect(returnUrl);
                 }
@@ -291,7 +292,6 @@ namespace OnlineHomeServices.Controllers
         {
             Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
             obj.Status = "Denied";
-
             _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
             return RedirectToAction("CustomerOrder");
 
@@ -331,6 +331,17 @@ namespace OnlineHomeServices.Controllers
         {
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
         }
-
+        public ActionResult customerprofile()
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_User>().GetAllRecords());
+        }
+        public ActionResult reviewrender()
+        {
+            return PartialView(_unitOfWork.GetRepositoryInstance<Tbl_review>().GetAllRecords());
+        }
+        public ActionResult Rederedcustomerprofile()
+        {
+            return View();
+        }
     }
 }
