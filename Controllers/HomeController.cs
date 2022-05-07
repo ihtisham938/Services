@@ -343,5 +343,54 @@ namespace OnlineHomeServices.Controllers
         {
             return View();
         }
+
+        public ActionResult Becomeseller(String name)
+        {
+
+            var roles= _unitOfWork.GetRepositoryInstance<Tbl_Roles>().GetAllRecordsIQueryable();
+            var obj = _unitOfWork.GetRepositoryInstance<Tbl_User>().GetAllRecordsIQueryable();
+            int iduser = 0;
+            foreach (var item in obj)
+            {
+                if (item.Username == name)
+                {
+                    item.id = iduser;
+
+                }
+            }
+            foreach (var item in roles)
+            {
+                if (item.UserId == iduser)
+                {
+                    item.id = iduser;
+                    return View();
+                }
+            }
+
+            Tbl_Roles obj1 = new Tbl_Roles();
+
+                
+            foreach(var item in obj)
+            {
+                if (item.Username == name)
+                {
+
+                    obj1.UserId = item.id;
+                    obj1.RoleName = "Seller";
+                    ctx.Tbl_Roles.Add(obj1);
+                    ctx.SaveChanges();
+                }
+
+            }
+         
+            
+
+
+
+
+
+
+            return RedirectToAction("Dashboard");
+        }
     }
 }
