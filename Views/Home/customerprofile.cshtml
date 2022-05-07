@@ -1,16 +1,13 @@
 ﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_User>
-@*@{
+@{
     ViewBag.Title = "customerprofile";
-  //  Layout = "~/Views/Shared/_Layout.cshtml";
- 
-}*@
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
+}
 <h2>My Profile</h2>
 
 @foreach (var item in Model)
-
 {
-
     if (item.Username.Equals(User.Identity.Name))
     {
 
