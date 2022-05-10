@@ -75,10 +75,9 @@
                     <ul class="nav nav-pills">
                         <li class="active"><a style="border-radius:initial;" href="#">Home</a></li>
                         <li><a style="border-radius:initial;" href="#">Location</a></li>
-                        <li><a style="border-radius:initial;" href="../Home/Myorders">My Offers</a></li>
-                        <li><a style="border-radius:initial;" href="../Home/CounterPending">Counter Offer</a></li>
+                        <li><a style="border-radius:initial;" href="../Home/Myorders">My orders</a></li>
                         <li><a style="border-radius:initial;" href="../Home/OrderCompleted">Completed orders</a></li>
-
+                        <li><a style="border-radius:initial;" href="#">About</a></li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
@@ -92,29 +91,9 @@
 
         @RenderBody()
         <hr />
-        <footer>
-            <div class="row">
-                <div class="col-md-12 copyright">
-
-                    <div class="col-md-6 col-sm-6 copyright-left">
-                        <p>&copy; @DateTime.Now.Year - OnlineHomeServices. All right reserved.</p>
-                    </div>
-
-                    <div class="col-md-6 col-sm-6 copyright-right">
-
-                        <ul class="list-unstyled list-social">
-                            <li><a href="#" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </footer>
+      
     </div>
-    
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -128,10 +107,9 @@
         $(this).prevAll(".ratingStar").addClass("fas").removeClass("far");
     });
     $(".ratingStar").click(function () {
-        debugger; 
+        debugger;
         var starValue = $(this).attr("data-value");
         $("#ratingValue").val(starValue);
     });
 </script>
 </html>
-    

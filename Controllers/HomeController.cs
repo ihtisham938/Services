@@ -199,8 +199,8 @@ namespace OnlineHomeServices.Controllers
         [HttpPost]
         public ActionResult Login(Tbl_User model1,String returnUrl)
         {
-         
-            Tbl_User obj1 = ctx.Tbl_User.Where(x => x.Username.Equals(model1.Username) && x.password.Equals(model1.password)).First();
+
+            Tbl_User obj1 = ctx.Tbl_User.Where(x => x.Username.Equals(model1.Username) && x.password.Equals(model1.password)).FirstOrDefault();
             if (obj1 != null)
             {
                 FormsAuthentication.SetAuthCookie(obj1.Username, false);
@@ -221,7 +221,17 @@ namespace OnlineHomeServices.Controllers
             }
 
         }
+        public ActionResult renderservices()
+        {
+            return PartialView(_unitOfWork.GetRepositoryInstance<Tbl_Service>().GetAllRecords());
+        }
 
+
+
+        public ActionResult cusomerCounteroffers()
+        {
+            return PartialView(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+        }
         public ActionResult sendRequest()
         {
             return View();
@@ -231,11 +241,14 @@ namespace OnlineHomeServices.Controllers
         {
 
             String sellername="";
+           int price = 0;
             foreach(var item in ctx.Tbl_Service.ToList())
             {
                 if(item.ServiceId== serviceid)
                 {
                     sellername = item.Username;
+                    price = (int)item.Price;
+
                 }
             }
 
@@ -248,6 +261,10 @@ namespace OnlineHomeServices.Controllers
             tbl.Date = DateTime.Now;
             tbl.Address = order.Address;
             tbl.Phone_number = order.Phone_number;
+            tbl.Lat = order.Lat;
+            tbl.Long = order.Long;
+            tbl.orderprice = price;
+
             ctx.Tbl_Orders.Add(tbl);
             ctx.SaveChanges();
             return View();
@@ -331,15 +348,17 @@ namespace OnlineHomeServices.Controllers
         {
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
         }
+        [ChildActionOnly]
         public ActionResult customerprofile()
         {
             return View(_unitOfWork.GetRepositoryInstance<Tbl_User>().GetAllRecords());
         }
+        [ChildActionOnly]
         public ActionResult reviewrender()
         {
             return PartialView(_unitOfWork.GetRepositoryInstance<Tbl_review>().GetAllRecords());
         }
-        public ActionResult Rederedcustomerprofile()
+        public ActionResult combinedprofile()
         {
             return View();
         }
@@ -354,15 +373,15 @@ namespace OnlineHomeServices.Controllers
             {
                 if (item.Username == name)
                 {
-                    item.id = iduser;
-
+                   
+                    iduser = item.id;
                 }
             }
             foreach (var item in roles)
             {
                 if (item.UserId == iduser)
                 {
-                    item.id = iduser;
+                
                     return View();
                 }
             }
@@ -390,7 +409,109 @@ namespace OnlineHomeServices.Controllers
 
 
 
-            return RedirectToAction("Dashboard");
+            return RedirectToAction("Dashboard","Admin");
         }
+
+        public ActionResult CounterPending()
+        {
+
+
+
+
+
+
+
+
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+        }
+
+        public ActionResult CounterAccepted(int id)
+        {
+
+
+
+            Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+            Tbl_Orders obj1 = new Tbl_Orders();
+            obj1 = obj;
+
+            obj.description = obj1.description;
+            obj.SellerName = obj1.SellerName;
+            obj.CustomerName = obj1.CustomerName;
+            obj.Address = obj1.Address;
+            obj.Long = obj1.Long;
+            obj.Lat = obj1.Lat;
+            obj.Phone_number = obj1.Phone_number;
+            obj.orderprice = obj1.orderprice;
+            obj.Date = obj1.Date;
+
+
+
+
+            obj.Status = "counterAccepted";
+
+            _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            ctx.SaveChanges();
+
+
+
+
+
+
+
+
+
+            //Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+            //obj.Status = "Approved";
+            //_unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            return RedirectToAction("CounterPending");
+        }
+
+
+        public ActionResult CounterDenied(int id)
+        {
+
+
+
+            Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+            Tbl_Orders obj1 = new Tbl_Orders();
+            obj1 = obj;
+
+            obj.description = obj1.description;
+            obj.SellerName = obj1.SellerName;
+            obj.CustomerName = obj1.CustomerName;
+            obj.Address = obj1.Address;
+            obj.Long = obj1.Long;
+            obj.Lat = obj1.Lat;
+            obj.Phone_number = obj1.Phone_number;
+            obj.orderprice = obj1.orderprice;
+            obj.Date = obj1.Date;
+
+
+
+
+            obj.Status = "counterDeny";
+
+            _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            ctx.SaveChanges();
+
+
+
+
+
+
+
+
+
+            //Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+            //obj.Status = "Approved";
+            //_unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            return RedirectToAction("CounterPending");
+        }
+
+
+      
+
+
+
     }
 }

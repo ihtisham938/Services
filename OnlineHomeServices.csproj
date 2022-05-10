@@ -1833,7 +1833,7 @@
     <Content Include="Views\Home\Loc.cshtml" />
     <Content Include="Views\Admin\ShowRequest.cshtml" />
     <Content Include="Views\Admin\Reviewsseller.cshtml" />
-    <Content Include="Views\Admin\AcceptOrder.cshtml" />
+    <Content Include="Views\Admin\AcceptedOrder.cshtml" />
     <Content Include="Views\Home\CustomerOrder.cshtml" />
     <Content Include="Views\Home\Ordercompleted.cshtml" />
     <Content Include="Views\Home\ReviewByCustomer.cshtml" />
@@ -1844,6 +1844,13 @@
     <Content Include="Views\Home\Rederedcustomerprofile.cshtml" />
     <Content Include="Views\Home\reviewrender.cshtml" />
     <Content Include="Views\Home\Becomeseller.cshtml" />
+    <Content Include="Views\Home\combinedprofile.cshtml" />
+    <Content Include="Views\Shared\_Layoutprofile.cshtml" />
+    <Content Include="Views\Home\renderServices.cshtml" />
+    <Content Include="Views\Admin\counterOffer.cshtml" />
+    <Content Include="Views\Home\cusomerCounteroffers.cshtml" />
+    <Content Include="Views\Home\CounterPending.cshtml" />
+    <Content Include="Views\Admin\MyCounteroffers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

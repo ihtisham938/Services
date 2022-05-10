@@ -67,6 +67,8 @@
           <Property Name="Phone_number" Type="nvarchar" MaxLength="50" />
           <Property Name="Date" Type="datetime" />
           <Property Name="orderprice" Type="int" />
+          <Property Name="CounterOffer" Type="nvarchar(max)" />
+          <Property Name="CounterOfferPrice" Type="int" />
         </EntityType>
         <EntityType Name="Tbl_review">
           <Key>
@@ -317,6 +319,8 @@
           <Property Name="Phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="orderprice" Type="Int32" />
+          <Property Name="CounterOffer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CounterOfferPrice" Type="Int32" />
         </EntityType>
         <EntityType Name="Tbl_review">
           <Key>
@@ -504,6 +508,8 @@
           <EntitySetMapping Name="Tbl_Orders">
             <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Orders">
               <MappingFragment StoreEntitySet="Tbl_Orders">
+                <ScalarProperty Name="CounterOfferPrice" ColumnName="CounterOfferPrice" />
+                <ScalarProperty Name="CounterOffer" ColumnName="CounterOffer" />
                 <ScalarProperty Name="orderprice" ColumnName="orderprice" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Phone_number" ColumnName="Phone_number" />

@@ -80,12 +80,7 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="~/Admin/Categories">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Categories</span>
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="../Admin/Service">
                     <i class="fas fa-fw fa-table"></i>
@@ -94,19 +89,28 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="../Admin/ShowRequest">
+                <a class="nav-link" href="@Url.Action("ShowRequest", "Admin") ">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Pending Orders</span>
                 </a>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link" href="../Admin/AcceptOrder/31">
+                <a class="nav-link" href="@Url.Action("MyCounteroffers", "Admin") ">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Counter offer</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href=" @Url.Action("AcceptedOrder", "Admin",new { id=31 })">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Ongoing Orders</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="~/Admin/OrdercompleteAdmin/31">
+                <a class="nav-link" href=" @Url.Action("OrdercompleteAdmin", "Admin")">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Complete Orders</span>
                 </a>

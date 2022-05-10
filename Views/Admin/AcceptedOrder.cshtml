@@ -3,7 +3,7 @@
 
 
 @{
-    ViewBag.Title = "AcceptOrder";
+    ViewBag.Title = "AcceptedOrder";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -43,7 +43,7 @@
                                 <td>@item.Phone_number</td>
                                 <td>@item.Date</td>
                                 <td>
-                                    @Html.ActionLink("Complete", "OrdercompleteAdmin", new { id = item.id })                              
+                                    @Html.ActionLink("Complete", "OrdercompleteAdmin1", new { id = item.id })                              
                                 </td>
 
                             </tr>

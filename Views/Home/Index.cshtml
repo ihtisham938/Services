@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Home Page";
 }
-<a href=" @Url.Action("Becomeseller", "Home", new { name = User.Identity.Name }, null) ">Become Seller</a>
+<a href=" @Url.Action("Becomeseller", "Home", new { name = User.Identity.Name }) ">Become Seller</a>
 <div id="themeSlider" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#themeSlider" data-slide-to="0" class="active"></li>

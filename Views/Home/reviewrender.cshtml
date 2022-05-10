@@ -1,5 +1,5 @@
-﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_review>
-<!DOCTYPE html>
+﻿
+@model IEnumerable<OnlineHomeServices.DAL.Tbl_review>
 
 <html>
 
@@ -15,7 +15,7 @@
     <script src="https://kit.fontawesome.com/9e5844b079.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h2 class="text-center">Seller reviews</h2>
+    <h2 class="text-center">Your Reviews</h2>
     @foreach (var item in Model)
     {
         var defaultstar = 5 - item.rating;
@@ -33,19 +33,19 @@
                                 <p>
                                     <a class="float-left"><strong>@item.reviewname</strong></a>
                                     <span class="text-warning float-right">
-                                            
-                                            @for (int i = 1; i <= item.rating; i++)
-                                            {
-                                                <i class="fas fa-star"></i>
-                                            }
-                                            @for (int i = 1; i <= defaultstar; i++)
-                                            {
-                                                <i class="far fa-star"></i>
 
-                                            }
+                                        @for (int i = 1; i <= item.rating; i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+                                        @for (int i = 1; i <= defaultstar; i++)
+                                        {
+                                            <i class="far fa-star"></i>
+
+                                        }
 
                                     </span>
-                                    
+
 
                                 </p>
                                 <div class="clearfix"></div>
@@ -58,4 +58,5 @@
             </div>
         }
     }
-
+    </body>
+</html>

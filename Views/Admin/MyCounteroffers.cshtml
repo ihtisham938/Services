@@ -1,0 +1,159 @@
+﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_Orders>
+
+
+@{
+    ViewBag.Title = "MyCounteroffers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>My Counter offers</h2>
+
+
+
+<h3>Pending Counter offers</h3>
+<div class="card mb-3">
+   
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Seller name.</th>
+                        <th>Order Description</th>
+                        <th>Counter Offer</th>
+                        <th>New Amount</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        if (item.SellerName == User.Identity.Name && item.Status == "counterPending")
+                        {
+                            int count = 1;
+                            <tr>
+                                <td>@item.SellerName</td>
+                                <td>@item.description</td>
+                                <td>@item.CounterOffer</td>
+                                <td>@item.CounterOfferPrice</td>
+                                <td>
+                                    <a class="nav-link" href=" @Url.Action("RejectOrder", "Admin", new { id = item.id })">Retrive</a>
+
+
+
+                                </td>
+
+                            </tr>
+                            count++;
+
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<br>
+<h3>Accepted Counter offers</h3>
+<div class="card mb-3">
+  
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Seller name.</th>
+                        <th>Order Description</th>
+                        <th>Counter Offer</th>
+                        <th>New Amount</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        if (item.SellerName == User.Identity.Name && item.Status == "counterAccepted")
+                        {
+                            int count = 1;
+                            <tr>
+                                <td>@item.SellerName</td>
+                                <td>@item.description</td>
+                                <td>@item.CounterOffer</td>
+                                <td>@item.CounterOfferPrice</td>
+                                <td>
+                                    <a class="nav-link" href=" @Url.Action("RejectOrder", "Admin", new { id = item.id })">Retrive</a>
+
+
+
+                                </td>
+
+                            </tr>
+                            count++;
+
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+<br>
+
+
+<h3>Denied counter offers</h3>
+<div class="card mb-3">
+   
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Seller name.</th>
+                        <th>Order Description</th>
+                        <th>Counter Offer</th>
+                        <th>New Amount</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        if (item.SellerName == User.Identity.Name && item.Status == "counterDeny")
+                        {
+                            int count = 1;
+                            <tr>
+                                <td>@item.SellerName</td>
+                                <td>@item.description</td>
+                                <td>@item.CounterOffer</td>
+                                <td>@item.CounterOfferPrice</td>
+                                <td>
+                                    <a class="nav-link" href=" @Url.Action("RejectOrder", "Admin", new { id = item.id })">Retrive</a>
+
+
+
+                                </td>
+
+                            </tr>
+                            count++;
+
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

@@ -42,6 +42,8 @@
                         <td>
                             @Html.ActionLink("Accept", "AcceptOrder", new { id = item.id }, null)
                             @Html.ActionLink("Reject", "RejectOrder", new { id = item.id }, null)
+
+                            @Html.ActionLink("CounterOffer", "counterOffer", new { id = item.id }, null)
                         </td>
 
                     </tr>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_Orders>
+
+@{
+    ViewBag.Title = "CounterAccepted";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Counter offers</h2>
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        List of Orders
+        <a href="../Home/Index" class="btn btn-info pull-right fa fa-plus">Add New</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Seller name.</th>
+                        <th>Order Description</th>
+                        <th>Counter Offer</th>
+                        <th>New Amount</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        if (item.CustomerName == User.Identity.Name && item.Status == "counterPending")
+                        {
+                            int count = 1;
+                            <tr>
+                                <td>@item.SellerName</td>
+                                <td>@item.description</td>
+                                <td>@item.CounterOffer</td>
+                                <td>@item.CounterOfferPrice</td>
+                                <td>
+                                    <a class="nav-link" href=" @Url.Action("CounterAccepted", "Home", new { id = item.id })">Accept</a>
+                                    <a class="nav-link" href=" @Url.Action("CounterDenied", "Home", new { id = item.id })">Deny</a>
+
+
+                                </td>
+
+                            </tr>
+                            count++;
+
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

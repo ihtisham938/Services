@@ -96,6 +96,20 @@ namespace OnlineHomeServices.Controllers
             _unitOfWork.GetRepositoryInstance<Tbl_Service>().Update(tbl);
             return RedirectToAction("Service");
         }
+
+        public ActionResult counterOffer(int id)
+        {
+            ViewBag.CategoryList = GetCategory();
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id));
+        }
+        [HttpPost]
+        public ActionResult CounterOffer(Tbl_Orders tbl, HttpPostedFileBase file)
+        {
+            tbl.Status = "counterPending";
+            
+            _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(tbl);
+            return RedirectToAction("ShowRequest");
+        }
         public ActionResult ServiceAdd()
         {
             ViewBag.CategoryList = GetCategory();
@@ -149,8 +163,16 @@ namespace OnlineHomeServices.Controllers
             return RedirectToAction("profile");
         }
 
+        public ActionResult AcceptedOrder()
+        {
+
+          
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+
+        }
+
         //Requests of orders
-        
+
         public ActionResult ShowRequest()
         {
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
@@ -165,18 +187,7 @@ namespace OnlineHomeServices.Controllers
         public ActionResult AcceptOrder(int id)
         {
             
-                //ctx.Entry(ctx.Tbl_Orders).Property("id").IsModified = false;
-                //ctx.Entry(ctx.Tbl_Orders).Property("description").IsModified = false;
-                //ctx.Entry(ctx.Tbl_Orders).Property("SellerName").IsModified = false;
-                //ctx.Entry(ctx.Tbl_Orders).Property("CustomerName").IsModified = false;
-
-                //ctx.Entry(ctx.Tbl_Orders).Property("Address").IsModified = false;
-                //ctx.Entry(ctx.Tbl_Orders).Property("Long").IsModified = false;
-                //ctx.Entry(ctx.Tbl_Orders).Property("Lat").IsModified = false;
-                //ctx.Entry(ctx.Tbl_Orders).Property("Phone_number").IsModified = false;
-
-                //ctx.Entry(ctx.Tbl_Orders).Property("Date").IsModified = false;
-                //ctx.Entry(ctx.Tbl_Orders).Property("orderprice").IsModified = false;
+                
                 Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
             Tbl_Orders obj1 = new Tbl_Orders();
             obj1 = obj;
@@ -228,13 +239,13 @@ namespace OnlineHomeServices.Controllers
         }
 
 
-        //public ActionResult OrdercompleteAdmin()
-        //{
-        //    return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+        public ActionResult OrdercompleteAdmin()
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
 
-        //}
-        //[HttpPost]
-        public ActionResult OrdercompleteAdmin(int id)
+        }
+
+        public ActionResult OrdercompleteAdmin1(int id)
           {
             //    Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
             //    obj.Status = "Complete";
@@ -276,7 +287,7 @@ namespace OnlineHomeServices.Controllers
             //Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
             //obj.Status = "Approved";
             //_unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
-            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+           return RedirectToAction("ShowRequest");
         }
 
         public ActionResult Reviewsseller(int id)
@@ -310,7 +321,19 @@ namespace OnlineHomeServices.Controllers
             return View();
         }
 
-       
+        public ActionResult MyCounteroffers()
+        {
+
+
+
+
+
+
+
+
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+        }
+
 
     }
 }
