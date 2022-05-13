@@ -177,6 +177,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdmindataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\Model1.Context.cs">
@@ -201,9 +202,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Tbl_Category.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Tbl_MemberRole.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Tbl_Members.cs">
@@ -1689,7 +1687,10 @@
     <Content Include="Content\Site.css" />
     <Content Include="HomeStyle\StyleSheet1.css" />
     <Content Include="Images\code1.PNG" />
+    <Content Include="Images\icons8-search-50.png" />
+    <Content Include="Images\Logo-removebg-preview.png" />
     <Content Include="Images\S1.jpg" />
+    <Content Include="Images\searchIcon.png" />
     <Content Include="Images\WhatsApp Image 2021-12-08 at 12.48.00.jpeg" />
     <Content Include="Images\WhatsApp Image 2021-12-08 at 12.48.01.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1768,6 +1769,8 @@
     <Content Include="AdminStyle\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="AdminStyle\vendor\jquery\jquery.min.map" />
     <Content Include="AdminStyle\vendor\jquery\jquery.slim.min.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1843,7 +1846,6 @@
     <Content Include="Views\Admin\Rederedcustomerprofile.cshtml" />
     <Content Include="Views\Home\Rederedcustomerprofile.cshtml" />
     <Content Include="Views\Home\reviewrender.cshtml" />
-    <Content Include="Views\Home\Becomeseller.cshtml" />
     <Content Include="Views\Home\combinedprofile.cshtml" />
     <Content Include="Views\Shared\_Layoutprofile.cshtml" />
     <Content Include="Views\Home\renderServices.cshtml" />
@@ -1851,6 +1853,10 @@
     <Content Include="Views\Home\cusomerCounteroffers.cshtml" />
     <Content Include="Views\Home\CounterPending.cshtml" />
     <Content Include="Views\Admin\MyCounteroffers.cshtml" />
+    <Content Include="Views\Admindata\Adminpro.cshtml" />
+    <Content Include="Views\Admindata\banedUsers.cshtml" />
+    <Content Include="Views\Admin\Adminlogin.cshtml" />
+    <Content Include="Views\Admin\MorderLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

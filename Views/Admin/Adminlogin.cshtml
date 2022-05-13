@@ -1,9 +1,10 @@
 ﻿@model OnlineHomeServices.DAL.Tbl_User
-@{
-    ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 
+@{
+    ViewBag.Title = "Adminlogin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <style>
     .btn {
         margin-top: 30px;
@@ -25,7 +26,6 @@
 @{var returnUrl = Context.Request.QueryString["ReturnUrl"];
     <form asp-route-returnurl="@returnUrl" method="post">
         @Html.AntiForgeryToken()
-
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="container">
@@ -58,7 +58,7 @@
 
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success">Login</button>
+                            <button type="submit" class="btn btn-success">Save</button>
                         </div>
                     </div>
                     <div class="float-right">
@@ -79,3 +79,4 @@
 
 
 </div>
+

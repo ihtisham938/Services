@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/05/2022 11:01:50
--- Generated from EDMX file: E:\aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\DAL\Model1.edmx
+-- Date Created: 05/13/2022 00:07:52
+-- Generated from EDMX file: D:\A_FYP\bbbbbbbbbbbbbbbbbbb\DAL\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -42,9 +42,6 @@ IF OBJECT_ID(N'[dbo].[Tbl_CartStatus]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Tbl_Category]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Tbl_Category];
-GO
-IF OBJECT_ID(N'[dbo].[Tbl_MemberRole]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Tbl_MemberRole];
 GO
 IF OBJECT_ID(N'[dbo].[Tbl_Members]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Tbl_Members];
@@ -100,14 +97,6 @@ CREATE TABLE [dbo].[Tbl_Category] (
 );
 GO
 
--- Creating table 'Tbl_MemberRole'
-CREATE TABLE [dbo].[Tbl_MemberRole] (
-    [MemberRoleID] int IDENTITY(1,1) NOT NULL,
-    [memberId] int  NULL,
-    [RoleId] int  NULL
-);
-GO
-
 -- Creating table 'Tbl_Members'
 CREATE TABLE [dbo].[Tbl_Members] (
     [MemberId] int IDENTITY(1,1) NOT NULL,
@@ -134,7 +123,9 @@ CREATE TABLE [dbo].[Tbl_Orders] (
     [Lat] varchar(50)  NULL,
     [Phone_number] nvarchar(50)  NULL,
     [Date] datetime  NULL,
-    [orderprice] int  NULL
+    [orderprice] int  NULL,
+    [CounterOffer] nvarchar(max)  NULL,
+    [CounterOfferPrice] int  NULL
 );
 GO
 
@@ -152,7 +143,7 @@ GO
 
 -- Creating table 'Tbl_Roles'
 CREATE TABLE [dbo].[Tbl_Roles] (
-    [id] int  NOT NULL,
+    [id] int IDENTITY(1,1) NOT NULL,
     [UserId] int  NOT NULL,
     [RoleName] varchar(200)  NOT NULL
 );
@@ -206,7 +197,8 @@ CREATE TABLE [dbo].[Tbl_User] (
     [Username] nchar(50)  NULL,
     [password] nchar(50)  NULL,
     [location] nchar(50)  NULL,
-    [Profilepic] varchar(max)  NULL
+    [Profilepic] varchar(max)  NULL,
+    [status] bit  NULL
 );
 GO
 
@@ -230,12 +222,6 @@ GO
 ALTER TABLE [dbo].[Tbl_Category]
 ADD CONSTRAINT [PK_Tbl_Category]
     PRIMARY KEY CLUSTERED ([CategoryId] ASC);
-GO
-
--- Creating primary key on [MemberRoleID] in table 'Tbl_MemberRole'
-ALTER TABLE [dbo].[Tbl_MemberRole]
-ADD CONSTRAINT [PK_Tbl_MemberRole]
-    PRIMARY KEY CLUSTERED ([MemberRoleID] ASC);
 GO
 
 -- Creating primary key on [MemberId] in table 'Tbl_Members'

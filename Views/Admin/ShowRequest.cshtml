@@ -21,7 +21,7 @@
                         <th>Customer name.</th>
                         <th>Address</th>
                         <th>Phone number</th>
-                        <th>Date</th>
+                        
                         <th>Action</th>
 
                     </tr>
@@ -38,12 +38,13 @@
                         <td>@item.CustomerName</td>
                         <td>@item.Address</td>
                         <td>@item.Phone_number</td>
-                        <td>@item.Date</td>
                         <td>
-                            @Html.ActionLink("Accept", "AcceptOrder", new { id = item.id }, null)
-                            @Html.ActionLink("Reject", "RejectOrder", new { id = item.id }, null)
-
-                            @Html.ActionLink("CounterOffer", "counterOffer", new { id = item.id }, null)
+                           
+                            <a href="@Url.Action("AcceptOrder", new { @item.id })" class="btn btn-success">Accept</a>
+                            <a href="@Url.Action("RejectOrder", new { @item.id })" class="btn btn-danger">Reject</a>
+                            <a href="@Url.Action("MorderLocation", new { @item.id })" class="btn btn-info">map</a>
+                            <a href="@Url.Action("counterOffer", new { @item.id })" class="btn btn-light">Counter</a>
+                           
                         </td>
 
                     </tr>

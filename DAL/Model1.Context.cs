@@ -28,7 +28,6 @@ namespace OnlineHomeServices.DAL
         public virtual DbSet<Tbl_Cart> Tbl_Cart { get; set; }
         public virtual DbSet<Tbl_CartStatus> Tbl_CartStatus { get; set; }
         public virtual DbSet<Tbl_Category> Tbl_Category { get; set; }
-        public virtual DbSet<Tbl_MemberRole> Tbl_MemberRole { get; set; }
         public virtual DbSet<Tbl_Members> Tbl_Members { get; set; }
         public virtual DbSet<Tbl_Orders> Tbl_Orders { get; set; }
         public virtual DbSet<Tbl_review> Tbl_review { get; set; }

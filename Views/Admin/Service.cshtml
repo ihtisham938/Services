@@ -31,26 +31,32 @@
                     </tr>
                 </tfoot>
                 <tbody>
+                    @{ 
 
-                    @foreach (var item in Model)
-                    {
-                        int count = 1;
+                                    int count = 1;
+                                    foreach (var item in Model)
+                                    {
 
-                        if (item.Username == User.Identity.Name)
-                        {
+                                        if (item.Username == User.Identity.Name)
+                                        {
 
 
                     <tr>
                         <td>@count</td>
                         <td>@item.ProductName</td>
                         <td>@item.CreatedDate</td>
-                        <td class="text-center"><a class='btn btn-info btn-xs' @Html.ActionLink("Edit", "ServiceEdit", new { serviceId = item.ServiceId }) ></a> <a class="btn btn-danger btn-xs" @Html.ActionLink("Delete", "serviceDelete", new { serviceId = item.ServiceId })> </a></td>
-                        
-                    </tr>
-                     count++;
+                        <td class="text-center">
+                            <a href="@Url.Action("ServiceEdit",new { @item.ServiceId})" class="btn btn-info">Edit</a>
+                            <a href="@Url.Action("serviceDelete",new { @item.ServiceId})" class="btn btn-danger">Delete</a>
+                        </td>
 
+                    </tr>
+
+                            count++;
                         }
                     }
+
+                        }
 
                 </tbody>
             </table>

@@ -4,13 +4,13 @@
     ViewBag.Title = "CounterAccepted";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<a href="../Home/Index" class="btn btn-info pull-right fa fa-plus">Add New</a>
 
 <h2>Counter offers</h2>
 <div class="card mb-3">
     <div class="card-header">
         <i class="fas fa-table"></i>
         List of Orders
-        <a href="../Home/Index" class="btn btn-info pull-right fa fa-plus">Add New</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -39,8 +39,10 @@
                                 <td>@item.CounterOffer</td>
                                 <td>@item.CounterOfferPrice</td>
                                 <td>
-                                    <a class="nav-link" href=" @Url.Action("CounterAccepted", "Home", new { id = item.id })">Accept</a>
-                                    <a class="nav-link" href=" @Url.Action("CounterDenied", "Home", new { id = item.id })">Deny</a>
+                                    <a href="@Url.Action("CounterAccepted",new { @item.id})" class="btn btn-success">Accept</a>
+                                    <a href="@Url.Action("CounterDenied",new { @item.id})" class="btn btn-danger">Deny</a>
+
+       
 
 
                                 </td>

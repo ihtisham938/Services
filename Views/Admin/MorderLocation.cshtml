@@ -1,0 +1,132 @@
+﻿
+@model OnlineHomeServices.DAL.Tbl_Orders
+
+@{ ViewBag.Title = "MorderLocation";
+                Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+<h2>Order Location</h2>
+
+
+<input type="text" name="lati" value="@Html.DisplayFor(model=>model.Lat)" hidden ) />
+<input type="text" name="longi" value="@Html.DisplayFor(model=>model.Long)" hidden />
+
+
+
+<div id='map' style='width: 100%; height: 100%;'></div>
+
+<script>function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(makeMap);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+
+    function makeMap(position) {
+
+        var lon = document.getElementsByName('longi')[0].value;
+        var lat = document.getElementsByName('lati')[0].value;
+
+        console.log(lat);
+        mapboxgl.accessToken = "pk.eyJ1IjoiZXhpbGVkIiwiYSI6ImNrenBoMWh0ZTBub2sydnFtZWgxeWV0ZW0ifQ.djRM7zp9hOjsvETW30EL_Q";
+        let map = new mapboxgl.Map({
+            container: "map",
+            style: "mapbox://styles/mapbox/streets-v11",
+            center: [lon, lat],
+            zoom: 20
+        });
+
+        // ADD A MARKER
+        var latitude = parseFloat(lat);
+        var longitude = parseFloat(lon);
+
+        const el = document.createElement('div');
+        el.className = 'marker';
+
+        const popup = new mapboxgl.Popup({ offset: 25 })
+            .setHTML('<p>Latitude: ' + latitude +
+                '<br>Longitude: ' + longitude + '</p>');
+
+        let marker = new mapboxgl.Marker()
+            .setLngLat([longitude, latitude])
+            .setPopup(popup)
+            .addTo(map);
+
+        // Marker for start
+        var startlat = position.coords.latitude;
+        var startlong = position.coords.longitude;
+        const el2 = document.createElement('div');
+        el2.className = 'start';
+        const popup2 = new mapboxgl.Popup({ offset: 25 })
+            .setHTML('<h6 style="font-weight:bold;">Starting Point</h6>' + '<p>Latitude: ' + startlat +
+                '<br>Longitude: ' + startlong + '</p>');
+        ;
+        let marker2 = new mapboxgl.Marker({
+            color: "#D62D20"
+        })
+            .setLngLat([startlong, startlat])
+            .setPopup(popup2)
+            .addTo(map);
+        var lineArray = [[]];
+        lineArray[0] = [lon, lat];
+
+
+
+        var linestring = turf.lineString(lineArray);
+        map.on('load', () => {
+
+            map.addLayer({
+                "id": "route",
+                "type": "line",
+                "source": {
+                    "type": "geojson",
+                    "data":
+                        linestring
+
+
+                },
+                "layout": {
+                    "line-join": "round",
+                    "line-cap": "round"
+                },
+                "paint": {
+                    "line-color": "#4A8CFF",
+                    "line-width": 2
+                }
+            });
+            var url = 'https://i.imgur.com/LcIng3L.png';
+            map.loadImage(url, function (err, image) {
+                if (err) {
+                    console.error('err image', err);
+                    return;
+                }
+                map.addImage('arrow', image);
+                map.addLayer({
+                    'id': 'arrow-layer',
+                    'type': 'symbol',
+                    "source": {
+                        "type": "geojson",
+                        "data":
+                            linestring
+
+
+                    },
+                    'layout': {
+                        'symbol-placement': 'line',
+                        'symbol-spacing': 1,
+                        'icon-allow-overlap': true,
+                        // 'icon-ignore-placement': true,
+                        'icon-image': 'arrow',
+                        'icon-size': 0.045,
+                        'visibility': 'visible'
+                    }
+                });
+            });
+        });
+
+    }
+
+
+    makeMap();</script>
+

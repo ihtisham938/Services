@@ -15,7 +15,7 @@
         int totalorder = 0;
         int totalCompleteorder = 0;
         int AcceptedOrder = 0;
-        int ? revinew = 0;
+        int revinew = 0;
         foreach (var item in Model)
         {
 
@@ -28,7 +28,7 @@
                     totalCompleteorder += 1;
                     if (item.orderprice.HasValue)
                     {
-                        revinew += item.orderprice;
+                        revinew += (int)item.orderprice;
                     }
 
                 }

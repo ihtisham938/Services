@@ -75,48 +75,38 @@
                     <h5>@item.ProductName</h5>
                     <p>Rs. @item.Price</p>
                     <p>
-                        @if (item.Quantity > 0)
+
+                        @using (Html.BeginForm("AddToCart", "Home", new { serviceId = item.ServiceId, url = "Index" }, FormMethod.Post))
                         {
-                            using (Html.BeginForm("AddToCart", "Home", new { serviceId = item.ServiceId, url = "Index" }, FormMethod.Post))
-                            {
-                                <button type="submit" class="pull-right"><i class="fa fa-shopping-cart"></i></button>
-                            }
-
-                            <a href=" @Url.Action("SendRequest", "Home", new { serviceId = item.ServiceId }, null) ">Send request</a>
+                            <a class="pull-right" href=" @Url.Action("SendRequest", "Home", new { serviceId = item.ServiceId }, null) "><i class="fa fa-send"></i></a>
+                        }
 
 
-                        <p>Available</p>
-                    }
-                    else
-                    {
-                        <p>Not Available</p>
-                    }
-                        </p>
 
-                        <div class="product-item-badge">
-                            @if (item.IsFeatured == true)
-                            {
+                   
+                    <p>Available</p>
 
-                                <p>New</p>
-
-                            }
-                            else
-                            {
-                                <p>Old</p>
-                            }
-                        </div>
-                        @if (User.Identity.IsAuthenticated)
+                    <div class="product-item-badge">
+                        @if (item.IsFeatured == true)
                         {
-                            if (User.IsInRole("Seller"))
-                            {
-                                <a href=" @Url.Action("ServiceDetails", "Home", new { serviceId = item.ServiceId }, null) ">Detail</a>
 
-                            }
+                            <p>New</p>
+
+                        }
+                        else
+                        {
+                            <p>Old</p>
                         }
                     </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("ServiceDetails", new { @item.ServiceId })" class="btn btn-warning center-block">Detail</a>
+
+                    }
                 </div>
             </div>
-        }
+        </div>
+    }
 
 
 </div>

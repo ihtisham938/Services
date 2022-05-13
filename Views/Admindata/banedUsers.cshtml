@@ -1,0 +1,66 @@
+﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_User>
+
+@{
+    ViewBag.Title = "banedUsers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@if (User.IsInRole("Admin"))
+{
+    <h2>baned Users</h2>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            List of Services
+            <a href="../Admindata/Adminpro" class="btn btn-info pull-right fa fa-user">Users</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped custab" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th class=" text-center">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            if (item.status == false)
+                            {
+
+
+                                int count = 1;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@item.Username</td>
+                                    <td>@item.password</td>
+                                    <td class="text-center">
+                                        <a href="@Url.Action("Unban", new { @item.id })" class="btn btn-danger">UnBan</a>
+
+                                    </td>
+                                </tr>
+                                count++;
+
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+}

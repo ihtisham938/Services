@@ -9,8 +9,6 @@
 <div class="card mb-3">
     <div class="card-header">
         <i class="fas fa-table"></i>
-        List of Orders
-        <a href="../Home/Index" class="btn btn-info pull-right fa fa-plus">Add New</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -18,8 +16,8 @@
                 <thead>
                     <tr>
                         <th>Sr. No.</th>
-                        <th>Service Name</th>
                         <th>Seller</th>
+                        <th>Status</th>
                         <th>Action</th>
 
                     </tr>
@@ -27,27 +25,29 @@
                 <tfoot>
                     <tr>
                         <th>Sr. No.</th>
-                        <th>Service</th>
                         <th>Seller</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     @foreach (var item in Model)
                     {
+                        if (item.CustomerName == User.Identity.Name && item.Status=="Pending") {
                             int count = 1;
                         <tr>
                             <td>@count</td>
-                            <td>@item.Date</td>
                             <td>@item.SellerName</td>
+                            <td>@item.Status</td>
                             <td>
-                                @Html.ActionLink("Delete", "DeleteOrder", new { id = item.id })
+                                <a href="@Url.Action("DeleteOrder",new { @item.id})" class="btn btn-danger">Delete</a>
+
                             </td>
 
                         </tr>
                             count++;
+                        }
 
-                        
                     }
                 </tbody>
             </table>

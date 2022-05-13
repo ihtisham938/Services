@@ -320,18 +320,35 @@ namespace OnlineHomeServices.Controllers
             ctx.SaveChanges();
             return View();
         }
+        [AllowAnonymous]
+        public ActionResult Adminlogin()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult Adminlogin(Tbl_User model1)
+        {
+            if (model1.Username == "Admin" && model1.password == "Admin")
+            {
+                return RedirectToAction("banedUsers", "Admindata");
+            }
+            else
+            {
+                ViewBag.error = "Invalid username or password.";
+                return View();
+            }
 
+        }
         public ActionResult MyCounteroffers()
         {
+           return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+        }
+        public ActionResult MorderLocation(int id)
+        {
 
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecordsIQueryable().Where(i => i.id == id).First());
 
-
-
-
-
-
-
-            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
         }
 
 

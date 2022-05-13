@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>sendRequest</h2>
+<h2>Seller</h2>
 
 @using (Html.BeginForm())
 {
@@ -13,7 +13,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Tbl_Orders</h4>
+        <h4>Send Request to seller</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -36,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Long, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Long, new { htmlAttributes = new { @class = "form-control", @id = "longi", disabled = "disabled", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.Long, new { htmlAttributes = new { @class = "form-control", @id = "longi", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.Long, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Lat, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Lat, new { htmlAttributes = new { @class = "form-control", @id = "lati", disabled = "disabled", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.Lat, new { htmlAttributes = new { @class = "form-control", @id = "lati", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.Lat, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -69,7 +69,7 @@
 
 <div>
 
-    <button>@Html.ActionLink("Back to List", "Index")</button>
+    <button>@Html.ActionLink("Back", "Index")</button>
 
 </div>
 @section Scripts {

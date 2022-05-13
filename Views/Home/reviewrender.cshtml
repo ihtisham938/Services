@@ -19,7 +19,7 @@
     @foreach (var item in Model)
     {
         var defaultstar = 5 - item.rating;
-        if (item.reviwername == User.Identity.Name)
+        if (item.reviewname == User.Identity.Name)
         {
             <div class="card card-outline-secondary my-4">
 
@@ -31,7 +31,7 @@
                             </div>
                             <div class="col-md-10">
                                 <p>
-                                    <a class="float-left"><strong>@item.reviewname</strong></a>
+                                    <a class="float-left"><strong>@item.reviwername</strong></a>
                                     <span class="text-warning float-right">
 
                                         @for (int i = 1; i <= item.rating; i++)

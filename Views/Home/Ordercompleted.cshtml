@@ -2,24 +2,22 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<a href="../Home/Index" class="btn btn-info pull-right fa fa-plus">Make New Request</a>
+
 <h2>Completed Order</h2>
 
 
 <div class="card mb-3">
     <div class="card-header">
-        <i class="fas fa-table"></i>
-        List of Orders
-        <a href="../Home/Index" class="btn btn-info pull-right fa fa-plus">Make New Request</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Customer name.</th>
+                        <th>Seller name.</th>
                         <th>Description</th>
                         <th>Address</th>
-                        <th>Phone number</th>
                         <th>Date</th>
                         <th>Action</th>
 
@@ -30,22 +28,18 @@
                     @foreach (var item in Model)
                     {
 
-                        if (item.CustomerName == User.Identity.Name &&  item.Status == "Complete")
-                                {
-                            int count = 1;
+                        if (item.CustomerName == User.Identity.Name && item.Status == "Complete")
+                        {
                             <tr>
-                                <td>@item.CustomerName</td>
+                                <td>@item.SellerName</td>
                                 <td>@item.description</td>
                                 <td>@item.Address</td>
-                                <td>@item.Phone_number</td>
                                 <td>@item.Date</td>
                                 <td>
-                                    @Html.ActionLink("Review", "ReviewByCustomer", new { id = item.id })
 
+                                    <a href="@Url.Action("ReviewByCustomer",new { @item.id})" class="btn btn-success">Review</a>
                                 </td>
-
                             </tr>
-                            count++;
 
                         }
                     }

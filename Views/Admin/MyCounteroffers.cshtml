@@ -33,21 +33,21 @@
 
                         if (item.SellerName == User.Identity.Name && item.Status == "counterPending")
                         {
-                            int count = 1;
+                            
                             <tr>
                                 <td>@item.SellerName</td>
                                 <td>@item.description</td>
                                 <td>@item.CounterOffer</td>
                                 <td>@item.CounterOfferPrice</td>
                                 <td>
-                                    <a class="nav-link" href=" @Url.Action("RejectOrder", "Admin", new { id = item.id })">Retrive</a>
+                                    <a href="@Url.Action("RejectOrder", new { @item.id })" class="btn btn-success">Retrive</a>
 
 
 
                                 </td>
 
                             </tr>
-                            count++;
+                           
 
                         }
                     }
@@ -88,7 +88,8 @@
                                 <td>@item.CounterOffer</td>
                                 <td>@item.CounterOfferPrice</td>
                                 <td>
-                                    <a class="nav-link" href=" @Url.Action("RejectOrder", "Admin", new { id = item.id })">Retrive</a>
+                                    <a href="@Url.Action("RejectOrder", new { @item.id })" class="btn btn-success">Retrive</a>
+
 
 
 
@@ -133,21 +134,19 @@
 
                         if (item.SellerName == User.Identity.Name && item.Status == "counterDeny")
                         {
-                            int count = 1;
+                          
                             <tr>
                                 <td>@item.SellerName</td>
                                 <td>@item.description</td>
                                 <td>@item.CounterOffer</td>
                                 <td>@item.CounterOfferPrice</td>
                                 <td>
-                                    <a class="nav-link" href=" @Url.Action("RejectOrder", "Admin", new { id = item.id })">Retrive</a>
-
+                                    <a href="@Url.Action("RejectOrder", new { @item.id })" class="btn btn-success">Retrive</a>
 
 
                                 </td>
 
                             </tr>
-                            count++;
 
                         }
                     }

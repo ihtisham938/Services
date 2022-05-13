@@ -160,21 +160,8 @@ namespace OnlineHomeServices.Controllers
             
             ctx.Tbl_User.Add(obj1);
             ctx.SaveChanges();
-            if (model.id != 0)
-            {
-                string data1 = objfrm["menu"];
-                Tbl_Roles tt = new Tbl_Roles();
-                tt.RoleName = data1;
-                tt.UserId = model.id;
-                ctx.Tbl_Roles.Add(tt);
-                ctx.SaveChanges();
-                return RedirectToAction("Login");
-
-            }
-            else
-            {
-                return RedirectToAction("SelectRole");
-            }
+           
+            return RedirectToAction("Login");
 
         }
         public ActionResult SelectRole()
@@ -216,7 +203,7 @@ namespace OnlineHomeServices.Controllers
             }
             else
             {
-                ViewBag.error = "Invalid username and password.";
+                ViewBag.error = "Invalid username or password.";
                 return View();
             }
 
@@ -381,8 +368,8 @@ namespace OnlineHomeServices.Controllers
             {
                 if (item.UserId == iduser)
                 {
-                
-                    return View();
+
+                    return RedirectToAction("Dashboard", "Admin");
                 }
             }
 
@@ -401,27 +388,11 @@ namespace OnlineHomeServices.Controllers
                 }
 
             }
-         
-            
-
-
-
-
-
-
             return RedirectToAction("Dashboard","Admin");
         }
 
         public ActionResult CounterPending()
         {
-
-
-
-
-
-
-
-
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
         }
 
@@ -493,14 +464,6 @@ namespace OnlineHomeServices.Controllers
 
             _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
             ctx.SaveChanges();
-
-
-
-
-
-
-
-
 
             //Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
             //obj.Status = "Approved";

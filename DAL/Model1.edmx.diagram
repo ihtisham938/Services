@@ -8,18 +8,17 @@
         <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_Cart" Width="1.5" PointX="5.25" PointY="2" />
         <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_CartStatus" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_Category" Width="1.5" PointX="0.75" PointY="2" />
-        <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_MemberRole" Width="1.5" PointX="9.75" PointY="0.75" />
         <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_Members" Width="1.5" PointX="5.75" PointY="5.125" />
         <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_Orders" Width="1.5" PointX="0.75" PointY="9.75" />
-        <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_review" Width="1.5" PointX="2.75" PointY="9.75" />
-        <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_Roles" Width="1.5" PointX="3" PointY="6.25" />
+        <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_review" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_Roles" Width="1.5" PointX="3" PointY="6.375" />
         <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_Service" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_ShippingDetails" Width="1.5" PointX="8" PointY="5" />
-        <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_SlideImage" Width="1.5" PointX="4.75" PointY="9.75" />
+        <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_SlideImage" Width="1.5" PointX="2.75" PointY="9.75" />
         <EntityTypeShape EntityType="dbOnlineHomeServicesModel.Tbl_User" Width="1.5" PointX="0.75" PointY="6" />
         <AssociationConnector Association="dbOnlineHomeServicesModel.FK__Tbl_Cart__Servic__38996AB5" />
         <AssociationConnector Association="dbOnlineHomeServicesModel.FK__Tbl_Servi__Categ__398D8EEE" />
-        <AssociationConnector Association="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__412EB0B6" />
+        <AssociationConnector Association="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327" />
         <AssociationConnector Association="dbOnlineHomeServicesModel.FK_Tbl_Roles_Tbl_User" />
       </Diagram>
     </edmx:Diagrams>

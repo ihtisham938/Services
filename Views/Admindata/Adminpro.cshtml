@@ -1,0 +1,115 @@
+﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_User>
+
+@{
+    ViewBag.Title = "Adminpro";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@if (User.IsInRole("Admin"))
+{
+
+
+    <h2>Adminpro</h2>
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            List of Services
+            <a href="../Admindata/banedUsers" class="btn btn-info pull-right fa fa-ban">Baned Users</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped custab" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th class=" text-center">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            if (item.status == true)
+                            {
+
+
+                                int count = 1;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@item.Username</td>
+                                    <td>@item.password</td>
+                                    <td class="text-center">
+                                        <a href="@Url.Action("Ban", new { @item.id })" class="btn btn-danger">Ban</a>
+                                    </td>
+                                </tr>
+                                count++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+}
+
+@*<div>
+        <h4>Tbl_User</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Username)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Username)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.password)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.password)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.location)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.location)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Profilepic)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Profilepic)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
