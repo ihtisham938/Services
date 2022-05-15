@@ -1,0 +1,56 @@
+﻿@model OnlineHomeServices.DAL.Tbl_Orders
+<link href="~/Content/cardstyle.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Customerpayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+ 
+
+    <!--
+
+    GRADIENT BANNER DESIGN BY SIMON LURWER ON DRIBBBLE:
+    https://dribbble.com/shots/14101951-Banners
+
+    -->
+    <div class="main-container">
+        <div class="heading">
+            <h1 class="heading__title">Payment</h1>
+            <p class="heading__credits"><a class="heading__link" target="_blank" href="https://dribbble.com/sl">You can pay in hand no third party involved</a></p>
+        </div>
+        <div class="cards">
+            <div class="card card-1">
+                <div class="card__icon"><i class="fa fa-magnet"></i></div>
+                <p class="card__exit"><i class="fa-money-bill"></i></p>
+                <h2 class="card__title">Your order is complete</h2>
+                <br>
+                <h3 class="card__desc">Rs. @Html.ViewData.Model.orderprice</h3>
+
+                @if (Html.ViewData.Model.Paymentstatus.Equals("Pending   "))
+                {
+                    @*<p class="card__apply">
+                        <button class="button-63 "><a class="card__link" href="#">Mark as pay </a></button>
+                    </p>*@
+
+
+
+                    <div class="text-box">
+                        <p style="color:white">Pay in hand and hit Payment submited</p>
+                        <a href="@Url.Action("makepayment", "Home", new { id = Html.ViewData.Model.id })" class="btn card__link btn-white btn-        animate">Submit payment</a>
+                    </div>
+                }
+                else
+                {
+                    <p class="card__apply">
+                        <h5 class="card__desc" style="color:white; font-weight:500;">Paid<i class="fa-dot-circle"></i></h5>
+                    </p>
+                }
+
+            </div>
+        
+        </div>
+    </div>
+
+}
+

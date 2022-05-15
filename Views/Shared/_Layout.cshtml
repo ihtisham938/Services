@@ -1,4 +1,6 @@
 ﻿@using OnlineHomeServices.Models.Home;
+@using OnlineHomeServices;
+@using OnlineHomeServices.Models;
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,11 +25,11 @@
                 <div class="logo">
                     @*<img src="~/Images/Logo-removebg-preview.png" class="img-fluid img-thumbnail" />*@
                     <h1><a href="../Home/Index">Online <span>Home Services</span></a></h1>
-                    
+
                     <p>Services</p>
                 </div>
             </div>
-                
+
             <div class="col-md-6 col-sm-6 col-xs-6">
                 @*<div class="account">
                        <ul>
@@ -55,13 +57,15 @@
                             <ul class="dropdown-menu">
 
                                 <li class="divider"></li>
+                                <li><a href=" @Url.Action("Becomeseller", "Home", new { name = User.Identity.Name }) ">Become Seller</a></li>
                                 <li><a href="@Url.Action("combinedprofile", "Home")">Profile</a></li>
+
                                 <li><a href="@Url.Action("Logout", "Home")">Logout</a></li>
                                 @*<li><a href="@Url.Action("Rederedcustomerprofile", "Home")">Profile</a></li>*@
-                                
+
                             </ul>
                         }
-                        </li>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -70,68 +74,95 @@
             <div class="col-md-12">
                 <div class="nav-menus">
 
-                    <ul class="nav nav-pills">
-                        <li class="active"><a style="border-radius:initial;" href="#">Home</a></li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li><a style="border-radius:initial;" href="../Home/Myorders">My Pending Offers</a></li>
-                            <li><a style="border-radius:initial;" href="../Home/CounterPending">Counter Offer</a></li>
-                            <li><a style="border-radius:initial;" href="../Home/OrderCompleted">Completed orders</a></li>
-                            }
-                            else
+                    <ul class="nav nav-pills" id="myTab">
+                        <li class="nav-item">
+                            <a class="nav-link active" style="border-radius:initial;" href="../Home/Index">Home</a></liclas>
+                            @if (User.Identity.IsAuthenticated)
                             {
-                                <li>@Html.ActionLink("Login", "Login", "Home")</li>
 
-                            }
+                            <li class="nav-item"> @Html.ActionLink("My Pending Order", "MyOrders", "Home")  </li>
+                            <li class="nav-item"><a class="nav-link" style="border-radius:initial;" href="../Home/CounterPending">Counter Offer</a></li>
+                            <li class="nav-item"><a class="nav-link" style="border-radius:initial;" href="../Home/OrderCompleted">Completed orders</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-link">@Html.ActionLink("Login", "Login", "Home")</li>
+
+                        }
                         </ul>
+                    </div>
                 </div>
+
             </div>
 
+
+            @RenderBody()
+            <hr />
+            <footer>
+                <div class="row">
+                    <div class="col-md-12 copyright">
+
+                        <div class="col-md-6 col-sm-6 copyright-left">
+                            <p>&copy; @DateTime.Now.Year - OnlineHomeServices. All right reserved.</p>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 copyright-right">
+
+                            <ul class="list-unstyled list-social">
+                                <li><a href="#" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </footer>
         </div>
 
 
-        @RenderBody()
-        <hr />
-        <footer>
-            <div class="row">
-                <div class="col-md-12 copyright">
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 
-                    <div class="col-md-6 col-sm-6 copyright-left">
-                        <p>&copy; @DateTime.Now.Year - OnlineHomeServices. All right reserved.</p>
-                    </div>
+    </body>
+    <script type="text/javascript">
 
-                    <div class="col-md-6 col-sm-6 copyright-right">
 
-                        <ul class="list-unstyled list-social">
-                            <li><a href="#" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        $(function () {
+            var page = sessionStorage.getItem('page');
+            var navbar = document.querySelectorAll('li');
+            if (page == null) {
+                $(navbar[0]).addClass('active');
+            } else {
+                navbar.forEach((item, index) => {
+                    if (item.children[0].href == page) {
+                        $(item).addClass('active').siblings().removeClass('active');
+                    }
+                });
+            }
+        })
 
-        </footer>
-    </div>
-    
+        $(document).on('click', 'ul li', function () {
+            var x = this.children[0].href;
+            sessionStorage.setItem('page', x);
+        });
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 
-</body>
-<script>
-    $(".ratingStar").hover(function () {
-        $(".ratingStar").addClass("far").removeClass("fas");
-        $(this).addClass("fas").removeClass("far");
-        $(this).prevAll(".ratingStar").addClass("fas").removeClass("far");
-    });
-    $(".ratingStar").click(function () {
-        debugger; 
-        var starValue = $(this).attr("data-value");
-        $("#ratingValue").val(starValue);
-    });
-</script>
+
+
+
+        $(".ratingStar").hover(function () {
+            $(".ratingStar").addClass("far").removeClass("fas");
+            $(this).addClass("fas").removeClass("far");
+            $(this).prevAll(".ratingStar").addClass("fas").removeClass("far");
+        });
+        $(".ratingStar").click(function () {
+            debugger;
+            var starValue = $(this).attr("data-value");
+            $("#ratingValue").val(starValue);
+        });
+    </script>
 </html>
-    

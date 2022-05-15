@@ -221,7 +221,7 @@ namespace OnlineHomeServices.Controllers
             //Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
             //obj.Status = "Approved";
             //_unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
-            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetAllRecords());
+            return RedirectToAction("AcceptedOrder");
 
         }
 
@@ -287,7 +287,7 @@ namespace OnlineHomeServices.Controllers
             //Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
             //obj.Status = "Approved";
             //_unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
-           return RedirectToAction("ShowRequest");
+           return RedirectToAction("AcceptedOrder");
         }
 
         public ActionResult Reviewsseller(int id)
@@ -351,6 +351,54 @@ namespace OnlineHomeServices.Controllers
 
         }
 
+        public ActionResult paymentseller(int id)
+        {
+
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id));
+
+        }
+
+
+
+        public ActionResult paymentdone(int id)
+        {
+
+
+            Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+            Tbl_Orders obj1 = new Tbl_Orders();
+            obj1 = obj;
+
+            obj.description = obj1.description;
+            obj.SellerName = obj1.SellerName;
+            obj.CustomerName = obj1.CustomerName;
+            obj.Address = obj1.Address;
+            obj.Long = obj1.Long;
+            obj.Lat = obj1.Lat;
+            obj.Phone_number = obj1.Phone_number;
+            obj.orderprice = obj1.orderprice;
+            obj.Date = obj1.Date;
+
+
+
+
+            obj.Status = obj1.Status;
+            obj.Paymentstatus = "paid";
+            _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            ctx.SaveChanges();
+
+
+
+
+
+
+
+
+
+            //Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+            //obj.Status = "Approved";
+            //_unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            return RedirectToAction("paymentseller", new { id = obj.id });
+        }
 
     }
 }

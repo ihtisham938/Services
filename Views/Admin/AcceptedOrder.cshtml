@@ -43,7 +43,8 @@
                                 <td>@item.Phone_number</td>
                                 <td>@item.Date</td>
                                 <td>
-                                    @Html.ActionLink("Complete", "OrdercompleteAdmin1", new { id = item.id })                              
+                                    <a class="btn btn-success"href="@Url.Action("OrdercompleteAdmin1", new { @item.id })  ">Complete</a>  
+                                 
                                 </td>
 
                             </tr>
