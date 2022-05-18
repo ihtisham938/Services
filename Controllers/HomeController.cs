@@ -245,6 +245,7 @@ namespace OnlineHomeServices.Controllers
             tbl.CustomerName = User.Identity.Name;
             tbl.SellerName = sellername;
             tbl.Status = "Pending";
+            tbl.Paymentstatus = "Pending";
             tbl.Date = DateTime.Now;
             tbl.Address = order.Address;
             tbl.Phone_number = order.Phone_number;
@@ -472,7 +473,51 @@ namespace OnlineHomeServices.Controllers
         }
 
 
-      
+        public ActionResult Customerpayment(int id)
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id));
+        }
+
+        public ActionResult makepayment(int id)
+        {
+
+
+            Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+            Tbl_Orders obj1 = new Tbl_Orders();
+            obj1 = obj;
+
+            obj.description = obj1.description;
+            obj.SellerName = obj1.SellerName;
+            obj.CustomerName = obj1.CustomerName;
+            obj.Address = obj1.Address;
+            obj.Long = obj1.Long;
+            obj.Lat = obj1.Lat;
+            obj.Phone_number = obj1.Phone_number;
+            obj.orderprice = obj1.orderprice;
+            obj.Date = obj1.Date;
+
+
+
+
+            obj.Status = obj1.Status;
+            obj.Paymentstatus = "Submited";
+            _unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            ctx.SaveChanges();
+
+
+
+
+
+
+
+
+
+            //Tbl_Orders obj = _unitOfWork.GetRepositoryInstance<Tbl_Orders>().GetFirstorDefault(id);
+            //obj.Status = "Approved";
+            //_unitOfWork.GetRepositoryInstance<Tbl_Orders>().Update(obj);
+            return RedirectToAction("Customerpayment", new { id = obj.id });
+        }
+
 
 
 

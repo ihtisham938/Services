@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_Orders>
+<link href="~/Content/panal.css" rel="stylesheet" />
 
 
 
@@ -7,55 +8,122 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Accepted Order</h2>
+@*<h2>Accepted Order</h2>
 
 
-<div class="card mb-3">
-    <div class="card-header">
-        <i class="fas fa-table"></i>
-        List of Orders
-        <a href="../Home/Index" class="btn btn-info pull-right fa fa-plus">Add New</a>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Customer name.</th>
-                        <th>Address</th>
-                        <th>Phone number</th>
-                        <th>Date</th>
-                        <th>Action</th>
-
-                    </tr>
-                </thead>
-            
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-
-                        if (item.SellerName == User.Identity.Name && item.Status == "Approved")
-                        {
-                            int count = 1;
-                            <tr>
-                                <td>@item.CustomerName</td>
-                                <td>@item.Address</td>
-                                <td>@item.Phone_number</td>
-                                <td>@item.Date</td>
-                                <td>
-                                    @Html.ActionLink("Complete", "OrdercompleteAdmin1", new { id = item.id })                              
-                                </td>
-
-                            </tr>
-                            count++;
-
-                        }
-                    }
-                </tbody>
-            </table>
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            List of Orders
+            <a href="../Home/Index" class="btn btn-info pull-right fa fa-plus">Add New</a>
         </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Customer name.</th>
+                            <th>Address</th>
+                            <th>Phone number</th>
+                            <th>Date</th>
+                            <th>Action</th>
 
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            if (item.SellerName == User.Identity.Name && item.Status == "Approved")
+                            {
+                                int count = 1;
+                                <tr>
+                                    <td>@item.CustomerName</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Phone_number</td>
+                                    <td>@item.Date</td>
+                                    <td>
+                                        <a class="btn btn-success"href="@Url.Action("OrdercompleteAdmin1", new { @item.id })  ">Complete</a>
+
+                                    </td>
+
+                                </tr>
+                                count++;
+
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>*@
+
+
+
+
+<div class="main-container">
+
+
+    <div class="heading">
+        <h1 class="heading__title">Ongoing Projects</h1>
+        <p class="credit">You have to complete following orders</p>
+
+
+
+        @{
+            int i = 0;
+
+
+            foreach (var item in Model)
+            {
+
+                if (item.SellerName == User.Identity.Name && item.Status == "Approved")
+                {
+                    i += 1;
+                }
+
+            }
+            if (i == 0)
+            {
+                <p style="color:red; padding-top:5em; ">No data available</p>
+
+            }
+        }
     </div>
+    @foreach (var item in Model)
+    {
+
+
+        if (item.SellerName == User.Identity.Name && item.Status == "Approved")
+        {
+            <div class="cards">
+
+                <div class="card card-3">
+                    <div class="card__icon"><i class="fas fa-bolt"></i></div>
+                    <p class="card__exit"><i class="fas fa-user-circle fa-fw"></i></p>
+                    <h2 class="card__title">@item.CustomerName</h2>
+                    <p class="heading__credits">@item.Address</p>
+                    <p class="heading__price">Rs. @item.orderprice</p>
+                    <div class=" bu">
+
+                        <p class="card__apply">
+                            <a class="btn btn-success" href="@Url.Action("OrdercompleteAdmin1", new { @item.id })  ">Complete</a>
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        }
+    }
+
+
+
+
 </div>
-
-

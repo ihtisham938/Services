@@ -179,6 +179,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdmindataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HtmlUtility.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -202,6 +203,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Tbl_Category.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Tbl_MemberRole.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Tbl_Members.cs">
@@ -1667,9 +1671,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="AdminStyle\css\dashboard.css" />
+    <Content Include="Content\cardstyle.css" />
     <Content Include="Content\MyMainLayOut.css" />
     <Content Include="Content\PagedList.css" />
+<<<<<<< HEAD
     <Content Include="Content\StyleSheet1.css" />
+=======
+    <Content Include="Content\panal.css" />
+>>>>>>> fb2b1c4e26c1fc15001d59db87ad543ef4698f3a
     <Content Include="DAL\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -1771,7 +1780,12 @@
     <Content Include="AdminStyle\vendor\jquery\jquery.min.map" />
     <Content Include="AdminStyle\vendor\jquery\jquery.slim.min.map" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
     <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\IISProfile1.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1858,6 +1872,8 @@
     <Content Include="Views\Admindata\banedUsers.cshtml" />
     <Content Include="Views\Admin\Adminlogin.cshtml" />
     <Content Include="Views\Admin\MorderLocation.cshtml" />
+    <Content Include="Views\Home\Customerpayment.cshtml" />
+    <Content Include="Views\Admin\paymentseller.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -30,6 +30,14 @@
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsDelete" Type="bit" />
         </EntityType>
+        <EntityType Name="Tbl_MemberRole">
+          <Key>
+            <PropertyRef Name="MemberRoleID" />
+          </Key>
+          <Property Name="MemberRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="memberId" Type="int" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
         <EntityType Name="Tbl_Members">
           <Key>
             <PropertyRef Name="MemberId" />
@@ -71,7 +79,7 @@
           <Property Name="Orderid" Type="int" />
           <Property Name="rating" Type="int" />
           <Property Name="Review" Type="nvarchar(max)" />
-          <Property Name="date" Type="datetime" />
+          <Property Name="date" Type="date" />
           <Property Name="reviwername" Type="nvarchar" MaxLength="50" />
           <Property Name="reviewname" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -160,7 +168,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_Shipp__Membe__3A81B327">
+        <Association Name="FK__Tbl_Shipp__Membe__412EB0B6">
           <End Role="Tbl_Members" Type="Self.Tbl_Members" Multiplicity="0..1" />
           <End Role="Tbl_ShippingDetails" Type="Self.Tbl_ShippingDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -188,6 +196,7 @@
           <EntitySet Name="Tbl_Cart" EntityType="Self.Tbl_Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_CartStatus" EntityType="Self.Tbl_CartStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_MemberRole" EntityType="Self.Tbl_MemberRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Members" EntityType="Self.Tbl_Members" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Orders" EntityType="Self.Tbl_Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_review" EntityType="Self.Tbl_review" Schema="dbo" store:Type="Tables" />
@@ -204,7 +213,7 @@
             <End Role="Tbl_Category" EntitySet="Tbl_Category" />
             <End Role="Tbl_Service" EntitySet="Tbl_Service" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Shipp__Membe__3A81B327" Association="Self.FK__Tbl_Shipp__Membe__3A81B327">
+          <AssociationSet Name="FK__Tbl_Shipp__Membe__412EB0B6" Association="Self.FK__Tbl_Shipp__Membe__412EB0B6">
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
             <End Role="Tbl_ShippingDetails" EntitySet="Tbl_ShippingDetails" />
           </AssociationSet>
@@ -221,6 +230,7 @@
           <EntitySet Name="Tbl_Cart" EntityType="dbOnlineHomeServicesModel.Tbl_Cart" />
           <EntitySet Name="Tbl_CartStatus" EntityType="dbOnlineHomeServicesModel.Tbl_CartStatus" />
           <EntitySet Name="Tbl_Category" EntityType="dbOnlineHomeServicesModel.Tbl_Category" />
+          <EntitySet Name="Tbl_MemberRole" EntityType="dbOnlineHomeServicesModel.Tbl_MemberRole" />
           <EntitySet Name="Tbl_Members" EntityType="dbOnlineHomeServicesModel.Tbl_Members" />
           <EntitySet Name="Tbl_Orders" EntityType="dbOnlineHomeServicesModel.Tbl_Orders" />
           <EntitySet Name="Tbl_review" EntityType="dbOnlineHomeServicesModel.Tbl_review" />
@@ -237,7 +247,7 @@
             <End Role="Tbl_Category" EntitySet="Tbl_Category" />
             <End Role="Tbl_Service" EntitySet="Tbl_Service" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Shipp__Membe__3A81B327" Association="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327">
+          <AssociationSet Name="FK__Tbl_Shipp__Membe__412EB0B6" Association="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__412EB0B6">
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
             <End Role="Tbl_ShippingDetails" EntitySet="Tbl_ShippingDetails" />
           </AssociationSet>
@@ -273,6 +283,14 @@
           <Property Name="IsDelete" Type="Boolean" />
           <NavigationProperty Name="Tbl_Service" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Servi__Categ__398D8EEE" FromRole="Tbl_Category" ToRole="Tbl_Service" />
         </EntityType>
+        <EntityType Name="Tbl_MemberRole">
+          <Key>
+            <PropertyRef Name="MemberRoleID" />
+          </Key>
+          <Property Name="MemberRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="memberId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+        </EntityType>
         <EntityType Name="Tbl_Members">
           <Key>
             <PropertyRef Name="MemberId" />
@@ -286,7 +304,7 @@
           <Property Name="IsDelete" Type="Boolean" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Tbl_ShippingDetails" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327" FromRole="Tbl_Members" ToRole="Tbl_ShippingDetails" />
+          <NavigationProperty Name="Tbl_ShippingDetails" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__412EB0B6" FromRole="Tbl_Members" ToRole="Tbl_ShippingDetails" />
         </EntityType>
         <EntityType Name="Tbl_Orders">
           <Key>
@@ -315,7 +333,7 @@
           <Property Name="Orderid" Type="Int32" />
           <Property Name="rating" Type="Int32" />
           <Property Name="Review" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="date" Type="DateTime" Precision="0" />
           <Property Name="reviwername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="reviewname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -362,7 +380,7 @@
           <Property Name="OrderId" Type="Int32" />
           <Property Name="AmountPaid" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Tbl_Members" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__3A81B327" FromRole="Tbl_ShippingDetails" ToRole="Tbl_Members" />
+          <NavigationProperty Name="Tbl_Members" Relationship="dbOnlineHomeServicesModel.FK__Tbl_Shipp__Membe__412EB0B6" FromRole="Tbl_ShippingDetails" ToRole="Tbl_Members" />
         </EntityType>
         <EntityType Name="Tbl_SlideImage">
           <Key>
@@ -409,7 +427,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_Shipp__Membe__3A81B327">
+        <Association Name="FK__Tbl_Shipp__Membe__412EB0B6">
           <End Type="dbOnlineHomeServicesModel.Tbl_Members" Role="Tbl_Members" Multiplicity="0..1" />
           <End Type="dbOnlineHomeServicesModel.Tbl_ShippingDetails" Role="Tbl_ShippingDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -464,6 +482,15 @@
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_MemberRole">
+            <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_MemberRole">
+              <MappingFragment StoreEntitySet="Tbl_MemberRole">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="memberId" ColumnName="memberId" />
+                <ScalarProperty Name="MemberRoleID" ColumnName="MemberRoleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
