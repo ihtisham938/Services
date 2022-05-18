@@ -10,6 +10,8 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/MyMainLayOut.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @Scripts.Render("~/bundles/modernizr")
 
 
@@ -54,11 +56,14 @@
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">Online <b class="caret"></b></a>
                             <ul class="dropdown-menu">
 
-                                <li class="divider"></li>
-                                <li><a href="@Url.Action("combinedprofile", "Home")">Profile</a></li>
-                                <li><a href="@Url.Action("Logout", "Home")">Logout</a></li>
-                                @*<li><a href="@Url.Action("Rederedcustomerprofile", "Home")">Profile</a></li>*@
                                 
+                                <a href="@Url.Action("combinedprofile", "Home")">Profile</a>
+                                <a href="@Url.Action("Logout", "Home")">Logout</a>
+                                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                                    <i class="fa fa-bars"></i>
+                                    </a>
+                                    @*<li><a href="@Url.Action("Rederedcustomerprofile", "Home")">Profile</a></li>*@
+
                             </ul>
                         }
                         </li>
@@ -68,7 +73,7 @@
         <div class="row">
 
             <div class="col-md-12">
-                <div class="nav-menus">
+                <div class="topnav" id="myTopnav">
 
                     <ul class="nav nav-pills">
                         <li class="active"><a style="border-radius:initial;" href="#">Home</a></li>
@@ -122,6 +127,18 @@
 
 </body>
 <script>
+    /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
+<script>
+    
     $(".ratingStar").hover(function () {
         $(".ratingStar").addClass("far").removeClass("fas");
         $(this).addClass("fas").removeClass("far");

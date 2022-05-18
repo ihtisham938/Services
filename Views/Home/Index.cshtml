@@ -83,7 +83,7 @@
 
 
 
-                   
+
                     <p>Available</p>
 
                     <div class="product-item-badge">
@@ -113,3 +113,14 @@
 <div class="container">
     @Html.PagedListPager(Model.ListOfServices, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayItemSliceAndTotal = true })
 </div>
+<script>
+    /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
