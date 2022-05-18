@@ -3,11 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
 .main-container {
     padding: 30px;
 }
@@ -21,10 +16,16 @@ body {
 .heading__title {
     font-weight: 600;
 }
+.credit {
+    margin: 10px 0px;
+   
+    font-size: 25px;
+    transition: all 0.5s;
+}
 
 .heading__credits {
     margin: 10px 0px;
-    color: #888888;
+   color:white;
     font-size: 25px;
     transition: all 0.5s;
 }
@@ -44,17 +45,6 @@ body {
     flex-wrap: wrap;
     justify-content: center;
 }
-.cardspanal {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 
 .card {
     margin: 20px;
@@ -62,7 +52,7 @@ body {
     width: 500px;
     min-height: 200px;
     display: grid;
-    grid-template-rows: 20px 50px 1fr 50px 50px;
+    grid-template-rows: 20px 50px 1fr 50px 50px ifr;
     border-radius: 10px;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
     transition: all 0.2s;
@@ -111,29 +101,23 @@ body {
     font-weight: 400;
     color: #ffffff;
 }
-.card__desc {
+.heading__price {
+    margin: 10px 0px;
+    color: white;
+    font-size: 25px;
     grid-row: 4/5;
-    font-weight: 300;
-    color: #ffffff;
+    transition: all 0.5s;
 }
-.Actionbtn{
-    display:flex;
-    justify-content:space-between;
-}
-.Actionbtn a{
-    position:relative;
-    }
-    .card__apply {
-        grid-row: 5/6;
-        justify-content: space-between;
-    }
 
+.card__apply {
+    grid-row: 5/6;
+    align-self: center;
+}
 
 /* CARD BACKGROUNDS */
 
 .card-1 {
     background: radial-gradient(#1fe4f5, #3fbafe);
-    align-self:center;
 }
 
 .card-2 {
@@ -159,74 +143,3 @@ body {
         justify-content: center;
     }
 }
-
-
-
-.btn {
-    grid-row: 4/5;
-}
-.btn:link,
-.btn:visited {
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 15px 40px;
-    display: inline-block;
-    border-radius: 100px;
-    transition: all .2s;
-    position: absolute;
-}
-
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.btn:active {
-    transform: translateY(-1px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btn-white {
-    background-color: #fff;
-    color: #777;
-}
-
-.btn::after {
-    content: "";
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    border-radius: 100px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: all .4s;
-}
-
-.btn-white::after {
-    background-color: #fff;
-}
-
-.btn:hover::after {
-    transform: scaleX(1.4) scaleY(1.6);
-    opacity: 0;
-}
-
-.btn-animated {
-    animation: moveInBottom 5s ease-out;
-    animation-fill-mode: backwards;
-}
-
-@keyframes moveInBottom {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0px);
-    }
-}
-

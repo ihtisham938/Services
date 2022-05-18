@@ -4,6 +4,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <!-- Bootstrap core CSS-->
+    <link href="~/AdminStyle/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <!-- Custom fonts for this template-->
+    <link href="~/AdminStyle/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="~/AdminStyle/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="~/AdminStyle/css/sb-admin.css" rel="stylesheet">
+    <link href="~/AdminStyle/css/dashboard.css" rel="stylesheet">
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
@@ -76,7 +91,7 @@
 
                     <ul class="nav nav-pills" id="myTab">
                         <li class="nav-item">
-                            <a class="nav-link active" style="border-radius:initial;" href="../Home/Index">Home</a></liclas>
+                            <a class="nav-link active" style="border-radius:initial;" href="../Home/Index">Home</a>
                             @if (User.Identity.IsAuthenticated)
                             {
 
@@ -127,42 +142,43 @@
         @RenderSection("scripts", required: false)
 
     </body>
-    <script type="text/javascript">
 
-
-
-        $(function () {
-            var page = sessionStorage.getItem('page');
-            var navbar = document.querySelectorAll('li');
-            if (page == null) {
-                $(navbar[0]).addClass('active');
-            } else {
-                navbar.forEach((item, index) => {
-                    if (item.children[0].href == page) {
-                        $(item).addClass('active').siblings().removeClass('active');
-                    }
-                });
-            }
-        })
-
-        $(document).on('click', 'ul li', function () {
-            var x = this.children[0].href;
-            sessionStorage.setItem('page', x);
-        });
-
-
-
-
-
-        $(".ratingStar").hover(function () {
-            $(".ratingStar").addClass("far").removeClass("fas");
-            $(this).addClass("fas").removeClass("far");
-            $(this).prevAll(".ratingStar").addClass("fas").removeClass("far");
-        });
-        $(".ratingStar").click(function () {
-            debugger;
-            var starValue = $(this).attr("data-value");
-            $("#ratingValue").val(starValue);
-        });
-    </script>
 </html>
+<script type="text/javascript">
+
+
+
+    $(function () {
+        var page = sessionStorage.getItem('page');
+        var navbar = document.querySelectorAll('li');
+        if (page == null) {
+            $(navbar[0]).addClass('active');
+        } else {
+            navbar.forEach((item, index) => {
+                if (item.children[0].href == page) {
+                    $(item).addClass('active').siblings().removeClass('active');
+                }
+            });
+        }
+    })
+
+    $(document).on('click', 'ul li', function () {
+        var x = this.children[0].href;
+        sessionStorage.setItem('page', x);
+    });
+
+
+
+
+
+    $(".ratingStar").hover(function () {
+        $(".ratingStar").addClass("far").removeClass("fas");
+        $(this).addClass("fas").removeClass("far");
+        $(this).prevAll(".ratingStar").addClass("fas").removeClass("far");
+    });
+    $(".ratingStar").click(function () {
+        debugger;
+        var starValue = $(this).attr("data-value");
+        $("#ratingValue").val(starValue);
+    });
+</script>

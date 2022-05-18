@@ -1,54 +1,119 @@
-﻿@model IEnumerable<OnlineHomeServices.DAL.Tbl_Orders>
+﻿
+@model IEnumerable<OnlineHomeServices.DAL.Tbl_Orders>
+<link href="~/Content/panal.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Home Page";
 }
-<a href="../Home/Index" class="btn btn-info pull-right fa fa-plus">Make New Request</a>
+@*<a href="../Home/Index" class="btn btn-info pull-right fa fa-plus">Make New Request</a>
 
-<h2>Completed Order</h2>
+    <h2>Completed Order</h2>
 
 
-<div class="card mb-3">
-    <div class="card-header">
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Seller name.</th>
-                        <th>Description</th>
-                        <th>Address</th>
-                        <th>Date</th>
-                        <th>Action</th>
+    <div class="card mb-3">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Seller name.</th>
+                            <th>Description</th>
+                            <th>Address</th>
+                            <th>Date</th>
+                            <th>Action</th>
 
-                    </tr>
-                </thead>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-
-                        if (item.CustomerName == User.Identity.Name && item.Status == "Complete")
+                    <tbody>
+                        @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>@item.SellerName</td>
-                                <td>@item.description</td>
-                                <td>@item.Address</td>
-                                <td>@item.Date</td>
-                                <td>
 
+                            if (item.CustomerName == User.Identity.Name && item.Status == "Complete")
+                            {
+                                <tr>
+                                    <td>@item.SellerName</td>
+                                    <td>@item.description</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Date</td>
+                                    <td>
+
+                                        <a href="@Url.Action("ReviewByCustomer",new { @item.id})" class="btn btn-success">Review</a>
+                                        <a href="@Url.Action("Customerpayment",new { @item.id})" class="btn btn-success">Payment</a>
+                                    </td>
+                                </tr>
+
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>*@
+
+
+<div class="main-container">
+
+
+    <div class="heading">
+        <h1 class="heading__title">Pending orders</h1>
+        <p class="credit">You have these pending offers</p>
+        @{
+            int i = 0;
+
+
+            foreach (var item in Model)
+            {
+
+                if (item.CustomerName == User.Identity.Name && item.Status == "Complete")
+                {
+                    i += 1;
+                }
+
+            }
+            if (i == 0)
+            {
+                <p style="color:red; padding-top:5em; ">No data available</p>
+
+            }
+        }
+    </div>
+
+
+
+
+            @foreach (var item in Model)
+            {
+
+                if (item.CustomerName == User.Identity.Name && item.Status == "Complete")
+                {
+                    <div class="cards">
+
+                        <div class="card card-3">
+                            <div class="card__icon"><i class="fas fa-bolt"></i></div>
+                            <p class="card__exit"><i class="fas fa-user-circle fa-fw"></i></p>
+                            <h2 class="card__title">@item.SellerName</h2>
+                            <p class="heading__credits">@item.Address</p>
+                            <p class="heading__price">Rs. @item.orderprice</p>
+                            <div class=" bu">
+
+                                <p class="card__apply">
                                     <a href="@Url.Action("ReviewByCustomer",new { @item.id})" class="btn btn-success">Review</a>
                                     <a href="@Url.Action("Customerpayment",new { @item.id})" class="btn btn-success">Payment</a>
-                                </td>
-                            </tr>
+                                </p>
 
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
+                            </div>
 
-    </div>
+                        </div>
+
+
+                    </div>
+
+                }
+            }
+        
+  
+
 </div>
-
-
