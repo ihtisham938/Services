@@ -27,5 +27,6 @@ namespace OnlineHomeServices.DAL
         public Nullable<int> orderprice { get; set; }
         public string CounterOffer { get; set; }
         public Nullable<int> CounterOfferPrice { get; set; }
+        public string Paymentstatus { get; set; }
     }
 }

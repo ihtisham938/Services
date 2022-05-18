@@ -61,6 +61,7 @@
           <Property Name="orderprice" Type="int" />
           <Property Name="CounterOffer" Type="nvarchar(max)" />
           <Property Name="CounterOfferPrice" Type="int" />
+          <Property Name="Paymentstatus" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Tbl_review">
           <Key>
@@ -304,6 +305,7 @@
           <Property Name="orderprice" Type="Int32" />
           <Property Name="CounterOffer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CounterOfferPrice" Type="Int32" />
+          <Property Name="Paymentstatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Tbl_review">
           <Key>
@@ -483,6 +485,7 @@
           <EntitySetMapping Name="Tbl_Orders">
             <EntityTypeMapping TypeName="dbOnlineHomeServicesModel.Tbl_Orders">
               <MappingFragment StoreEntitySet="Tbl_Orders">
+                <ScalarProperty Name="Paymentstatus" ColumnName="Paymentstatus" />
                 <ScalarProperty Name="CounterOfferPrice" ColumnName="CounterOfferPrice" />
                 <ScalarProperty Name="CounterOffer" ColumnName="CounterOffer" />
                 <ScalarProperty Name="orderprice" ColumnName="orderprice" />
